@@ -1,0 +1,202 @@
+<h2>Docs - Formatters</h2>
+
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    Formatters can be used to reformat data in a visualization, by changing the display values of the specified column in all rows of the visualization.
+  </p>
+  <p>
+    They only modify the display values; not the underlying values. For example, displayed value is "$1,000.00" but the underlying value is "1000".
+  </p>
+  <p>
+    Formatters can only affect one column at a time. To reformat multiple columns, apply a formatter to each column that you want to change.
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's Documentation", "http://code.google.com/apis/visualization/documentation/reference.html#formatters" %> for more details.
+  </p>
+</div>
+
+<div class='append-bottom'>
+  <hr>
+  <h3 >Usage</h3>
+  <p>
+    Firstly, initialize the required formatter, without (will use default) or with configuration options.
+  </p>
+  <p>
+    <code>
+      # Initialize and set width
+      <br/>
+      formatter = GoogleVisualr::BarFormat.new( { :width => 150 } )
+    </code>
+  </p>
+  <p>
+    Secondly, set the formatter to format the display values for specified column/s. The <em>columns</em> method is the only public method for a formatter.
+  </p>
+  <p>
+    <code>
+      # Apply to 2nd and 3rd Column
+      <br/>
+      formatter.columns(1,2)
+    </code>
+  </p>
+  <p>
+    Finally, pass the formatter as an argument to a visualization's <em>format</em> method. That's all!
+  </p>
+  <p>
+    <code>
+      @chart.format(formatter)
+    </code>
+  </p>
+</div>
+
+<div id='arrow_format'    class='append-bottom'>
+  <h3 class='sub'>google.visualization.ArrowFormat</h3>
+  <p>
+    Adds an up or down arrow to a numeric cell, depending on whether the value is above or below a specified base value.
+  </p>
+  <p>
+    There is no arrow is shown, when cell value is equal to the base value.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart_1'></div>
+  <%= @chart_1.render('chart_1') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create your chart object, then create your formatter and apply it to specific column/s.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=arrow_format.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript during rendering of the view.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=formatter.html.erb"></script>
+  </div>
+</div>
+
+<div id='bar_format'    class='append-bottom'>
+  <h3 class='sub'>google.visualization.BarFormat</h3>
+  <p>
+    Adds a colored bar to a numeric cell, indicating whether the cell value is above or below a specified base value.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart_2'></div>
+  <%= @chart_2.render('chart_2') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create your chart object, then create your formatter and apply it to specific column/s.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=bar_format.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript during rendering of the view.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=formatter.html.erb"></script>
+  </div>
+</div>
+
+<div id='color_format'  class='append-bottom'>
+  <h3 class='sub'>google.visualization.ColorFormat</h3>
+  <p>
+    Assigns colors (in HTML format, e.g. "black" or "#000") to the foreground or background of a numeric cell, depending on the cell value.
+  </p>
+  <p>
+    This formatter does not accept options in the constructor. Instead, you should call addRange() or addGradientRange() as many times as you want, to add color ranges, before calling format().
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart_3'></div>
+  <%= @chart_3.render('chart_3') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create your chart object, then create your formatter and apply it to specific column/s.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=color_format.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript during rendering of the view.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=formatter.html.erb"></script>
+  </div>
+</div>
+
+<div id='date_format'   class='append-bottom'>
+  <h3 class='sub'>google.visualization.DateFormat</h3>
+  <p>
+    Formats a JavaScript Date value in a variety of ways, including "January 1, 2009," "1/1/09" and "Jan 1, 2009.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart_4'></div>
+  <%= @chart_4.render('chart_4') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create your chart object, then create your formatter and apply it to specific column/s.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=date_format.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript during rendering of the view.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=formatter.html.erb"></script>
+  </div>
+</div>
+
+<div id='number_format' class='append-bottom'>
+  <h3 class='sub'>google.visualization.NumberFormat</h3>
+  <p>
+    Formatting options for numeric columns include specifying a prefix symbol (such as a $ sign) or the punctuation to use as a thousands marker.
+  </p>
+<div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart_5'></div>
+  <%= @chart_5.render('chart_5') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create your chart object, then create your formatter and apply it to specific column/s.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=number_format.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript during rendering of the view.
+    </p>
+    <script src="http://gist.github.com/356468.js?file=formatter.html.erb"></script>
+  </div>
+</div>

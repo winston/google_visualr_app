@@ -1,0 +1,33 @@
+<h2>GoogleVisualr - Line Chart</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    A line chart that displays tips when clicking on points, and animates lines when clicking on legend entries.
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "http://code.google.com/apis/visualization/documentation/gallery/linechart.html" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart'></div>
+  <%= @chart.render('chart') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create your chart object, and add column headers and row values, then set any configuration options.
+    </p>
+    <script src="http://gist.github.com/355312.js?file=example_controller.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript, as seen <%= link_to "here", "http://code.google.com/apis/visualization/documentation/gallery/line_chart.html#Example" %>, during rendering of the view.
+    </p>
+    <script src="http://gist.github.com/355312.js?file=line_chart.html.erb"></script>
+  </div>
+</div>

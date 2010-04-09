@@ -1,0 +1,33 @@
+<h2>GoogleVisualr - Motion Chart</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    A dynamic chart to explore several indicators over time. The chart is rendered within the browser using Flash.
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "http://code.google.com/apis/visualization/documentation/gallery/motionchart.html" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart'></div>
+  <%= @chart.render('chart') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create your chart object, and add column headers and row values, then set any configuration options.
+    </p>
+    <script src="http://gist.github.com/356375.js?file=example_controller.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript, as seen <%= link_to "here", "http://code.google.com/apis/visualization/documentation/gallery/motion_chart.html#Example" %>, during rendering of the view.
+    </p>
+    <script src="http://gist.github.com/356375.js?file=motion_chart.html.erb"></script>
+  </div>
+</div>

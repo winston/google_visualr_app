@@ -1,0 +1,36 @@
+<h2>GoogleVisualr - Map</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    Displays a map using the Google Maps API with data values (coordinates or addresses) being displayed as points on the map.
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "http://code.google.com/apis/visualization/documentation/gallery/map.html" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+  <p>
+    Important: Please specify the height and width of the div element explicitly.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart' style='width: 400px; height: 300px'></div>
+  <%= @chart.render('chart') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create your chart object, and add column headers and row values, then set any configuration options.
+    </p>
+    <script src="http://gist.github.com/356425.js?file=example_controller.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript, as seen <%= link_to "here", "http://code.google.com/apis/visualization/documentation/gallery/map.html#Example" %>, during rendering of the view.
+    </p>
+    <script src="http://gist.github.com/356425.js?file=map.html.erb"></script>
+  </div>
+</div>
