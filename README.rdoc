@@ -3,13 +3,13 @@
 This is the GoogleVisualr reference site, written in Rails.
 
 To see this reference site, you can:
-  * Go to {http://googlevisualr.heroku.com}[http://googlevisualr.heroku.com]
-  * Clone this repository, and run this site locally with <em>./script/server</em>
+* Go to {http://googlevisualr.heroku.com}[http://googlevisualr.heroku.com]
+* Clone this repository, and run this site locally with <em>./script/server</em>
 
 = Resources
 
-  * {GoogleVisualr GitHub Repository}[http://github.com/winston/google_visualr]
-  * {Google Visualization API}[http://code.google.com/apis/visualization/documentation/]
+* {GoogleVisualr GitHub Repository}[http://github.com/winston/google_visualr]
+* {Google Visualization API}[http://code.google.com/apis/visualization/documentation/]
 
 = Author
 
