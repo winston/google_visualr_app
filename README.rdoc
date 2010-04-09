@@ -1,0 +1,22 @@
+= Overview
+
+This is the GoogleVisualr reference site, written in Rails.
+
+To see this reference site, you can:
+  * Go to {http://googlevisualr.heroku.com}[http://googlevisualr.heroku.com]
+  * Clone this repository, and run this site locally with <em>./script/server</em>
+
+= Resources
+
+  * {GoogleVisualr GitHub Repository}[http://github.com/winston/google_visualr]
+  * {Google Visualization API}[http://code.google.com/apis/visualization/documentation/]
+
+= Author
+
+GoogleVisualr is maintained by {Winston Teo}[mailto:winstonyw+googlevisualr@gmail.com], and his Ninja Penguin.
+
+Who is Winston Teo? Find out more on {WinstonYW}[http://www.winstonyw.com], {LinkedIn}[http://sg.linkedin.com/in/winstonyw], or {follow Winston on Twitter}[http://www.twitter.com/winstonyw].
+
+= License
+
+Copyright © 2010 Winston Teo Yong Wei. Free software, released under the MIT license.
