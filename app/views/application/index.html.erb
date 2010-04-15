@@ -11,38 +11,28 @@
   </p>
   <h3>The Gist</h3>
   <p>
-    <ul>
-      <li>
-        In your model or controller, write Ruby code to create your visualization (e.g. Area Chart, Bar Chart, even Spark Lines etc).
-      </li>
-      <li>
-        Configure your visualization with all the options as listed in Google Visualization API Docs. E.g. <%= link_to "Area Chart's configuration options", "http://code.google.com/apis/visualization/documentation/gallery/areachart.html#Configuration_Options" %>.
-      </li>
-      <li>
-        In your view, just call a <em>visualization.render(div_id)</em> method that will magically generate and insert JavaScript into the final HTML output.
-      </li>
-      <li>
-        You get your visualization, and you didn't write any JavaScript!
-      </li>
-    </ul>
+    In your model or controller, write Ruby code to create your visualization (e.g. Area Chart, Bar Chart, even Spark Lines etc).
+  </p>
+  <p>
+    Configure your visualization with all the options as listed in Google Visualization API Docs.
+  </p>
+  <p>
+    In your view, invoke a <em>visualization.render(div_id)</em> method and that will magically generate and insert JavaScript into the final HTML output.
+  </p>
+  <p>
+    You get your visualization, and you didn't write any JavaScript!
   </p>
   <h3>Limitations</h3>
   <p>
-    Do note that GoogleVisualr is not a 100% complete wrapper for the Google Visualization API. These are not implemented for sake of simplicity:
+    GoogleVisualr is created solely for the aim of simplifying the display of a visualization, and not the interactions.
   </p>
   <p>
-    <ul>
-      <li>
-        JavaScript Methods for use after a visualization has been rendered in a view. E.g. <%= link_to "Area Chart's methods", "http://code.google.com/apis/visualization/documentation/gallery/areachart.html#Methods" %>.
-      </li>
-      <li>
-        JavaScript Events for use after a visualization has been rendered in a view. E.g. <%= link_to "Area Chart's events", "http://code.google.com/apis/visualization/documentation/gallery/areachart.html#Events" %>.
-      </li>
-      <li>
-        Visualizations not created by Google, and a few image-only charts.
-      </li>
-    </ul>
+    Hence, do note that GoogleVisualr is not a 100% complete wrapper for the Google Visualization API.
   </p>
+  <p>
+    To be precise, visualization-specific <em>Methods</em> and <em>Events</em> for use after a visualization has been rendered in a View have not been implemented,
+    because they felt more native being written as JavaScript functions, within views or .js files.
+  <p>
 </div>
 
 <!--
@@ -141,12 +131,12 @@
 -->
 <div id='support' class='append-bottom'>
   <hr/>
-  <h2>Support</h2>
+  <h2>Contribution and Support</h2>
   <p>
-    Please submit all feedback, bugs and feature-requests to <%= link_to "GitHub Issues Tracker", "http://github.com/winston/google_visualr/issues" %>.
+    The source of GoogleVisualr is available on <%= link_to "GitHub", "http://github.com/winston/google_visualr/" %>. Please feel free to clone/fork the project, and improve it further!
   </p>
   <p>
-    Please also feel free to clone/fork the project, and improve it further!
+    Please submit all feedback, bugs and feature-requests to <%= link_to "GitHub Issues Tracker", "http://github.com/winston/google_visualr/issues" %>.
   </p>
 </div>
 

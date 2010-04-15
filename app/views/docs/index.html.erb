@@ -7,7 +7,9 @@
     This page explains the standard GoogleVisualr constructor, and the standard methods exposed by all visualizations.
   </p>
   <p>
-    Note: All GoogleVisualr visualizations are created like <%= link_to "DataTable", "http://code.google.com/apis/visualization/documentation/reference.html#DataTable" %>, so it's helpful to go through that Google documentation too.
+    All visualizations are actually a wrapper of a <%= link_to "DataTable", "http://code.google.com/apis/visualization/documentation/reference.html#DataTable" %> JavaScript object,
+    By adding columns and rows, we are actually populating the DataTable,
+    which then materializes as its namesake-chart when render is invoked.
   </p>
 </div>
 
@@ -138,7 +140,7 @@
   <h3 class='sub'>Methods</h3>
 
   <div ='append-bottom'>
-    <h5><span class='cem'>add_column</span></h5>
+    <h5><span class='cem'>add_column(type [,label [,id]])</span></h5>
     <p>
       Adds a new column to the visualization.
     </p>
@@ -173,11 +175,17 @@
         </li>
       </ul>
     </p>
+    <p>
+      <code>
+        # Adds a column with data type and label<br/>
+        @chart.add_column('string', 'Name')
+      </code>
+    </p>
   </div>
 
   <div ='append-bottom'>
     <hr/>
-    <h5><span class='cem'>add_columns</span></h5>
+    <h5><span class='cem'>add_columns(columns)</span></h5>
     <p>
       Adds multiple columns to the visualization.
     </p>
@@ -189,11 +197,17 @@
         </li>
       </ul>
     </p>
+    <p>
+      <code>
+        # Adds 2 columns with data type and label<br/>
+        @chart.add_columns( [ { :type => 'string', :label => 'Name' }, { :type => 'number', :label => 'Age' }  ] )
+      </code>
+    </p>
   </div>
 
   <div ='append-bottom'>
     <hr/>
-    <h5><span class='cem'>add_row</span></h5>
+    <h5><span class='cem'>add_row(row)</span></h5>
     <p>
       Adds a new row to the visualization. Call method without any parameters to add an empty row, otherwise, call method with a row object.
     </p>
@@ -218,24 +232,24 @@
     </p>
     <p>
       <code>
-        # Add an empty row<br/>
-        @chart.add_row();<br/><br/>
+        # Adds an empty row<br/>
+        @chart.add_row()<br/><br/>
 
-        # Add a row with a string and a date value<br/>
+        # Adds a row with a string and a date value<br/>
         @chart.add_row( [ 'Hermione', Date.parse('1999-01-01') ] )<br/><br/>
 
-        # Add a row with two cells; second cell with a formatted value<br/>
+        # Adds a row with two cells; second cell with a formatted value<br/>
         @chart.add_row( [ 'Hermione', {v: Date.parse('1999-01-01'), f: 'January First, Nineteen ninety-nine'} ] )<br/><br/>
 
-        @chart.add_row( [ 'Col1Val', nil, 'Col3Val' ] ); // 2nd column is empty<br/>
-        @chart.add_row( [ 'Col1Val', '' , 'Col3Val' ] ); // 2nd column is empty
+        @chart.add_row( [ 'Col1Val', nil, 'Col3Val' ] ) // 2nd column is empty<br/>
+        @chart.add_row( [ 'Col1Val', '' , 'Col3Val' ] ) // 2nd column is empty
       </code>
     </p>
   </div>
 
   <div ='append-bottom'>
     <hr/>
-    <h5><span class='cem'>add_rows</span></h5>
+    <h5><span class='cem'>add_rows(array_or_num)</span></h5>
     <p>
       Adds multiple rows to the visualization. You can call this method with data to populate a set of new rows or create new empty rows.
     </p>
@@ -255,11 +269,23 @@
         </li>
       </ul>
     </p>
+    <p>
+      <code>
+        # Adds 2 rows<br/>
+        @chart.add_rows([<br/>
+            ['John', 18],<br/>
+            ['Jill', 22] <br/>
+        ])<br/><br/>
+
+        # Adds 5 empty rows<br/>
+        @chart.add_rows(5)
+      </code>
+    </p>
   </div>
 
   <div ='append-bottom'>
     <hr/>
-    <h5><span class='cem'>set_cell</span></h5>
+    <h5><span class='cem'>set_cell(row_index, column_index, value [, formatted_value])</span></h5>
     <p>
       Sets the value and/or formatted value of a cell.
     </p>
@@ -280,11 +306,20 @@
         </li>
       </ul>
     </p>
+    <p>
+      <code>
+        # Sets a cell without a formatted value<br/>
+        @charts.set_cell(0, 0, 'John')<br/><br/>
+
+        # Sets a cell with a formatted value<br/>
+        @charts.set_cell(0, 1, 18, '18 years old')
+      </code>
+    </p>
   </div>
 
   <div ='append-bottom'>
     <hr/>
-    <h5><span class='cem'>set_value</span></h5>
+    <h5><span class='cem'>set_value(row_index, column_index, value)</span></h5>
     <p>
       Sets the value of a cell. Overwrites any existing cell value, and clear out any formatted value for the cell.
     </p>
@@ -302,11 +337,17 @@
         </li>
       </ul>
     </p>
+    <p>
+      <code>
+        # Sets a cell<br/>
+        @charts.set_value(0, 0, 'John')
+      </code>
+    </p>
   </div>
 
   <div ='append-bottom'>
     <hr/>
-    <h5><span class='cem'>format</span></h5>
+    <h5><span class='cem'>format(formatter [, formatter]*)</span></h5>
     <p>
       Applies one or more formatters to the visualization to format the columns as specified by the formatter/s.
     </p>
@@ -318,10 +359,19 @@
         </li>
       </ul>
     </p>
+    <p>
+      <code>
+        # Passes in 1 formatter<br/>
+        @charts.format(formatter)<br/><br/>
+
+        # Passes in 3 formatters<br/>
+        @charts.format(formatter_1, formatter_2, formatter_2)
+      </code>
+    </p>
   </div>
 
   <div ='append-bottom'>
-    <h5><span class='cem'>render</span></h5>
+    <h5><span class='cem'>render(div_id)</span></h5>
     <p>
       Generates JavaScript and renders the visualization in the final HTML output.
     </p>
@@ -332,6 +382,12 @@
           <span class='cem'>div_id</span> [Required] The ID of the DIV element that the visualization should be rendered in.
         </li>
       </ul>
+    </p>
+    <p>
+      <code>
+        # Renders chart in Div with ID chart<br/>
+        @chart.render('chart')
+      </code>
     </p>
   </div>
 
