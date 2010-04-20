@@ -26,11 +26,12 @@ module GoogleVisualr
     #   cols is an array of objects describing the ID and type of each column. Each property is an object with the following properties (case-sensitive):
     #
     #   * type            [Required] The data type of the data in the column. Supports the following string values:
-    #     - 'string'    : String value. Example values: v:'hello'
-    #     - 'number'    : Number value. Example values: v:7 , v:3.14, v:-55
-    #     - 'date'      : Date object, with the time truncated. Example values: v:Date.parse('2010-01-01')
-    #     - 'datetime'  : Date object including the time. Example values: v:Date.parse('2010-01-01 14:20:25')
-    #     - 'boolean'   : Boolean value ('true' or 'false'). Example values: v: true
+    #     - 'string'    : String value. Example values: v:'foo', :v:'bar'
+    #     - 'number'    : Number value. Example values: v:7, v:3.14, v:-55
+    #     - 'boolean'   : Boolean value ('true' or 'false'). Example values: v:true, v:false
+    #     - 'date'      : Date object, with the time truncated. Example value: v:Date.parse('2010-01-01')
+    #     - 'datetime'  : DateTime/Time object, time inclusive. Example value: v:DateTime.parse('2010-01-01 14:20:25')
+    #     - 'timeofday' : Array of 3 numbers or 4 numbers, [Hour,Minute,Second,(Optional) Milliseconds]. Example value: v:[8, 15, 0]
     #   * label           [Optional] A string value that some visualizations display for this column. Example: label:'Height'
     #   * id              [Optional] A unique (basic alphanumeric) string ID of the column. Be careful not to choose a JavaScript keyword. Example: id:'col_1'
     #
@@ -217,12 +218,12 @@ module GoogleVisualr
 
     end
 
-    # If the column type is 'string'            , the value should be a string.
-    # If the column type is 'number'            , the value should be a number.
-    # If the column type is 'boolean'           , the value should be a boolean.
-    # If the column type is 'date' or 'datetime', the value should be a Date object.
-    # FIXME: To Implement
-    #   - If the column type is 'timeofday'         , the value should be an array of four numbers: [hour, minute, second, millisenconds].
+    # If the column type is 'string'    , the value should be a string.
+    # If the column type is 'number'    , the value should be a number.
+    # If the column type is 'boolean'   , the value should be a boolean.
+    # If the column type is 'date'      , the value should be a Date object.
+    # If the column type is 'datetime'  , the value should be a DateTime or Time object.
+    # If the column type is 'timeofday' , the value should be an array of three or four numbers: [hour, minute, second, optional milliseconds].
     def typecast(value)
 
       case
@@ -230,12 +231,14 @@ module GoogleVisualr
           return "'#{escape_single_quotes(value)}'"
         when value.is_a?(Integer)   || value.is_a?(Float)
           return value
-        when value.is_a?(Date)
-          return "new Date(#{value.year}, #{value.month-1}, #{value.day})"
         when value.is_a?(TrueClass) || value.is_a?(FalseClass)
           return "#{value}"
-        #Time
-          #
+        when value.is_a?(Date)
+          return "new Date(#{value.year}, #{value.month-1}, #{value.day})"
+        when value.is_a?(DateTime)  ||  value.is_a?(Time)
+          return "new Date(#{value.year}, #{value.month-1}, #{value.day}, #{value.hour}, #{value.min}, #{value.sec})"
+        when value.is_a?(Array)
+          return "[#{value.join(',')}]"
         else
           return value
       end

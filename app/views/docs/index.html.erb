@@ -56,19 +56,22 @@
           <span class='cem'>type</span> [Required] The data type of the data in the column. Supports the following string values:
           <ul>
             <li>
-              'string'   - String value. Example values: v:'hello'
+              'string'    - String value. Example values: v:'foo', :v:'bar'
             </li>
             <li>
-              'number'   - Number value. Example values: v:7 , v:3.14, v:-55
+              'number'    - Number value. Example values: v:7, v:3.14, v:-55
             </li>
             <li>
-              'date'     - Date object, with the time truncated. Example values: v:Date.parse('2010-01-01')
+              'boolean'   - Boolean value ('true' or 'false'). Example values: v:true, v:false
             </li>
             <li>
-              'datetime' - Date object including the time. Example values: v:Date.parse('2010-01-01 14:20:25')
+              'date'      - Date object, with the time truncated. Example value: v:Date.parse('2010-01-01')
             </li>
             <li>
-              'boolean'  - Boolean value ('true' or 'false'). Example values: v: true
+              'datetime'  - DateTime/Time object, time inclusive. Example value: v:DateTime.parse('2010-01-01 14:20:25')
+            </li>
+            <li>
+              'timeofday' - Array of 3 numbers or 4 numbers, [Hour,Minute,Second,(Optional) Milliseconds]. Example value: v:[8, 15, 0]
             </li>
           </ul>
         </li>
@@ -151,19 +154,22 @@
           <span class='cem'>type</span> [Required] The data type of the data in the column. Supports the following string values:
           <ul>
             <li>
-              'string'   - String value. Example values: v:'hello'
+              'string'    - String value. Example values: v:'foo', :v:'bar'
             </li>
             <li>
-              'number'   - Number value. Example values: v:7 , v:3.14, v:-55
+              'number'    - Number value. Example values: v:7, v:3.14, v:-55
             </li>
             <li>
-              'date'     - Date object, with the time truncated. Example values: v:Date.parse('2010-01-01')
+              'boolean'   - Boolean value ('true' or 'false'). Example values: v:true, v:false
             </li>
             <li>
-              'datetime' - Date object including the time. Example values: v:Date.parse('2010-01-01 14:20:25')
+              'date'      - Date object, with the time truncated. Example value: v:Date.parse('2010-01-01')
             </li>
             <li>
-              'boolean'  - Boolean value ('true' or 'false'). Example values: v: true
+              'datetime'  - DateTime/Time object, time inclusive. Example value: v:DateTime.parse('2010-01-01 14:20:25')
+            </li>
+            <li>
+              'timeofday' - Array of 3 numbers or 4 numbers, [Hour,Minute,Second,(Optional) Milliseconds]. Example value: v:[8, 15, 0]
             </li>
           </ul>
         </li>
