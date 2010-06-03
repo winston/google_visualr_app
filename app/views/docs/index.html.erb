@@ -315,10 +315,10 @@
     <p>
       <code>
         # Sets a cell without a formatted value<br/>
-        @charts.set_cell(0, 0, 'John')<br/><br/>
+        @chart.set_cell(0, 0, 'John')<br/><br/>
 
         # Sets a cell with a formatted value<br/>
-        @charts.set_cell(0, 1, 18, '18 years old')
+        @chart.set_cell(0, 1, 18, '18 years old')
       </code>
     </p>
   </div>
@@ -346,7 +346,7 @@
     <p>
       <code>
         # Sets a cell<br/>
-        @charts.set_value(0, 0, 'John')
+        @chart.set_value(0, 0, 'John')
       </code>
     </p>
   </div>
@@ -368,10 +368,32 @@
     <p>
       <code>
         # Passes in 1 formatter<br/>
-        @charts.format(formatter)<br/><br/>
+        @chart.format(formatter)<br/><br/>
 
         # Passes in 3 formatters<br/>
-        @charts.format(formatter_1, formatter_2, formatter_2)
+        @chart.format(formatter_1, formatter_2, formatter_2)
+      </code>
+    </p>
+  </div>
+
+  <div ='append-bottom'>
+    <h5><span class='cem'>set_options(options)</span></h5>
+    <p>
+      Sets chart configuration options with a hash.
+    </p>
+    <h6>Parameters</h6>
+    <p>
+      <ul>
+        <li>
+          <span class='cem'>options</span> [Required] A hash of configuration options.
+        </li>
+      </ul>
+    </p>
+    <p>
+      <code>
+        # Sets configuration options<br/>
+        options = { :width => 400, :height => 240, :title => 'Company Performance', :legend => 'bottom' }
+        @chart.set_options(options)
       </code>
     </p>
   </div>
