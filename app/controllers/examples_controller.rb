@@ -1,4 +1,4 @@
-class ExampleController < ApplicationController
+class ExamplesController < ApplicationController
 
   layout "default"
 
