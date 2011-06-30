@@ -1,0 +1,36 @@
+<h2>GoogleVisualr - Gauge</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    An SVG-based map of a continent, region, or country with colors and values assigned to specific areas.
+  </p>
+  <p>
+    Values are displayed as a color scale, and you can specify optional hover text for regions.
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "http://code.google.com/apis/visualization/documentation/gallery/geo_chart.html" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart'></div>
+  <%= raw @chart.to_js('chart') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create your chart object, and add column headers and row values, then set any configuration options.
+    </p>
+    <script src="http://gist.github.com/424765.js?file=example_controller.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript, as seen <%= link_to "here", "http://code.google.com/apis/visualization/documentation/gallery/gauge.html#Example" %>, during rendering of the view.
+    </p>
+    <script src="http://gist.github.com/424765.js?file=geomap.html.erb"></script>
+  </div>
+</div>
