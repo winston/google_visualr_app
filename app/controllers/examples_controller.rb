@@ -5,15 +5,15 @@ class ExamplesController < ApplicationController
   # http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html#Example
   def annotated_time_line
 
-    @chart = GoogleVisualr::AnnotatedTimeLine.new
-    @chart.add_column('date'  , 'Date')
-    @chart.add_column('number', 'Sold Pencils')
-    @chart.add_column('string', 'title1')
-    @chart.add_column('string', 'text1' )
-    @chart.add_column('number', 'Sold Pens'   )
-    @chart.add_column('string', 'title2')
-    @chart.add_column('string', 'text2' )
-    @chart.add_rows( [
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('date'  , 'Date')
+    data_table.new_column('number', 'Sold Pencils')
+    data_table.new_column('string', 'title1')
+    data_table.new_column('string', 'text1' )
+    data_table.new_column('number', 'Sold Pens'   )
+    data_table.new_column('string', 'title2')
+    data_table.new_column('string', 'text2' )
+    data_table.add_rows( [
       [ Date.parse("2008-2-1"), 30000, '', '', 40645, '', ''],
       [ Date.parse("2008-2-2"), 14045, '', '', 20374, '', ''],
       [ Date.parse("2008-2-3"), 55022, '', '', 50766, '', ''],
@@ -22,165 +22,175 @@ class ExamplesController < ApplicationController
       [ Date.parse("2008-2-6"), 33322, '', '', 39463, '', '']
     ] )
 
-    options = { :displayAnnotations => true }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :displayAnnotations => true }
+    @chart = GoogleVisualr::Interactive::AnnotatedTimeLine.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/areachart.html#Example
   def area_chart
 
-    @chart = GoogleVisualr::AreaChart.new
-    @chart.add_column('string', 'Year')
-    @chart.add_column('number', 'Sales')
-    @chart.add_column('number', 'Expenses')
-    @chart.add_rows(4)
-    @chart.set_value(0, 0, '2004')
-    @chart.set_value(0, 1, 1000)
-    @chart.set_value(0, 2, 400)
-    @chart.set_value(1, 0, '2005')
-    @chart.set_value(1, 1, 1170)
-    @chart.set_value(1, 2, 460)
-    @chart.set_value(2, 0, '2006')
-    @chart.set_value(2, 1, 1500)
-    @chart.set_value(2, 2, 660)
-    @chart.set_value(3, 0, '2007')
-    @chart.set_value(3, 1, 1030)
-    @chart.set_value(3, 2, 540)
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Year')
+    data_table.new_column('number', 'Sales')
+    data_table.new_column('number', 'Expenses')
+    data_table.add_rows( [
+      ['2004', 1000, 400],
+      ['2005', 1170, 460],
+      ['2006', 660, 1120],
+      ['2007', 1030, 540]
+    ])
 
-    options = { :width => 400, :height => 240, :title => 'Company Performance', :legend => 'bottom' }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { width: 400, height: 240, title: 'Company Performance', hAxis: {title: 'Year', titleTextStyle: {color: '#FF0000'}} }
+    @chart = GoogleVisualr::Interactive::AreaChart.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/barchart.html#Example
   def bar_chart
 
-    @chart = GoogleVisualr::BarChart.new
-    @chart.add_column('string', 'Year')
-    @chart.add_column('number', 'Sales')
-    @chart.add_column('number', 'Expenses')
-    @chart.add_rows(4)
-    @chart.set_value(0, 0, '2004')
-    @chart.set_value(0, 1, 1000)
-    @chart.set_value(0, 2, 400)
-    @chart.set_value(1, 0, '2005')
-    @chart.set_value(1, 1, 1170)
-    @chart.set_value(1, 2, 460)
-    @chart.set_value(2, 0, '2006')
-    @chart.set_value(2, 1, 1500)
-    @chart.set_value(2, 2, 660)
-    @chart.set_value(3, 0, '2007')
-    @chart.set_value(3, 1, 1030)
-    @chart.set_value(3, 2, 540)
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Year')
+    data_table.new_column('number', 'Sales')
+    data_table.new_column('number', 'Expenses')
+    data_table.add_rows(4)
+    data_table.set_cell(0, 0, '2004')
+    data_table.set_cell(0, 1, 1000)
+    data_table.set_cell(0, 2, 400)
+    data_table.set_cell(1, 0, '2005')
+    data_table.set_cell(1, 1, 1170)
+    data_table.set_cell(1, 2, 460)
+    data_table.set_cell(2, 0, '2006')
+    data_table.set_cell(2, 1, 660)
+    data_table.set_cell(2, 2, 1120)
+    data_table.set_cell(3, 0, '2007')
+    data_table.set_cell(3, 1, 1030)
+    data_table.set_cell(3, 2, 540)
 
-    options = { :width => 400, :height => 240, :title => 'Company Performance', :is3D => true }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :width => 400, :height => 240, :title => 'Company Performance', vAxis: {title: 'Year', titleTextStyle: {color: 'red'}} }
+    @chart = GoogleVisualr::Interactive::BarChart.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/columnchart.html#Example
   def column_chart
 
-    @chart = GoogleVisualr::ColumnChart.new
-    @chart.add_column('string', 'Year')
-    @chart.add_column('number', 'Sales')
-    @chart.add_column('number', 'Expenses')
-    @chart.add_rows(4)
-    @chart.set_value(0, 0, '2004')
-    @chart.set_value(0, 1, 1000)
-    @chart.set_value(0, 2, 400)
-    @chart.set_value(1, 0, '2005')
-    @chart.set_value(1, 1, 1170)
-    @chart.set_value(1, 2, 460)
-    @chart.set_value(2, 0, '2006')
-    @chart.set_value(2, 1, 1500)
-    @chart.set_value(2, 2, 660)
-    @chart.set_value(3, 0, '2007')
-    @chart.set_value(3, 1, 1030)
-    @chart.set_value(3, 2, 540)
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Year')
+    data_table.new_column('number', 'Sales')
+    data_table.new_column('number', 'Expenses')
+    data_table.add_rows(4)
+    data_table.set_cell(0, 0, '2004')
+    data_table.set_cell(0, 1, 1000)
+    data_table.set_cell(0, 2, 400)
+    data_table.set_cell(1, 0, '2005')
+    data_table.set_cell(1, 1, 1170)
+    data_table.set_cell(1, 2, 460)
+    data_table.set_cell(2, 0, '2006')
+    data_table.set_cell(2, 1, 660)
+    data_table.set_cell(2, 2, 1120)
+    data_table.set_cell(3, 0, '2007')
+    data_table.set_cell(3, 1, 1030)
+    data_table.set_cell(3, 2, 540)
 
-    options = { :width => 400, :height => 240, :title => 'Company Performance', :is3D => true }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :width => 400, :height => 240, :title => 'Company Performance', :hAxis => { :title => 'Year', :titleTextStyle => {:color => 'red'}} }
+    @chart = GoogleVisualr::Interactive::ColumnChart.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/gauge.html#Example
   def gauge
 
-    @chart = GoogleVisualr::Gauge.new
-    @chart.add_column('string'  , 'Label')
-    @chart.add_column('number'  , 'Value')
-    @chart.add_rows(3)
-    @chart.set_value(0, 0, 'Memory' )
-    @chart.set_value(0, 1, 80)
-    @chart.set_value(1, 0, 'CPU'    )
-    @chart.set_value(1, 1, 55)
-    @chart.set_value(2, 0, 'Network')
-    @chart.set_value(2, 1, 68);
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string'  , 'Label')
+    data_table.new_column('number'  , 'Value')
+    data_table.add_rows(3)
+    data_table.set_cell(0, 0, 'Memory' )
+    data_table.set_cell(0, 1, 80)
+    data_table.set_cell(1, 0, 'CPU'    )
+    data_table.set_cell(1, 1, 55)
+    data_table.set_cell(2, 0, 'Network')
+    data_table.set_cell(2, 1, 68);
 
-    options = { :width => 400, :height => 120, :redFrom => 90, :redTo => 100, :yellowFrom => 75, :yellowTo => 90, :minorTicks => 5 }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+
+    opts   = { :width => 400, :height => 120, :redFrom => 90, :redTo => 100, :yellowFrom => 75, :yellowTo => 90, :minorTicks => 5 }
+    @chart = GoogleVisualr::Interactive::Gauge.new(data_table, opts)
 
   end
+
+  # http://code.google.com/apis/visualization/documentation/gallery/geochart.html#Example
+  def geo_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Country')
+    data_table.new_column('number', 'Popularity')
+    data_table.add_rows(6)
+    data_table.set_cell(0, 0, 'Germany')
+    data_table.set_cell(0, 1, 200)
+    data_table.set_cell(1, 0, 'United States')
+    data_table.set_cell(1, 1, 300)
+    data_table.set_cell(2, 0, 'Brazil')
+    data_table.set_cell(2, 1, 400)
+    data_table.set_cell(3, 0, 'Canada')
+    data_table.set_cell(3, 1, 500)
+    data_table.set_cell(4, 0, 'France')
+    data_table.set_cell(4, 1, 600)
+    data_table.set_cell(5, 0, 'RU')
+    data_table.set_cell(5, 1, 700)
+
+    opts   = { :width => 500, :height => 300 }
+    @chart = GoogleVisualr::Interactive::GeoChart.new(data_table, opts)
+
+  end
+
 
   # http://code.google.com/apis/visualization/documentation/gallery/geomap.html#Example
   def geomap
 
     # Regions Example
-    @chart_regions = GoogleVisualr::GeoMap.new
-    @chart_regions.add_column('string'  , 'Country'   )
-    @chart_regions.add_column('number'  , 'Popularity')
-    @chart_regions.add_rows(6)
-    @chart_regions.set_value(0, 0, 'Germany'      );
-    @chart_regions.set_value(0, 1, 200);
-    @chart_regions.set_value(1, 0, 'United States');
-    @chart_regions.set_value(1, 1, 300);
-    @chart_regions.set_value(2, 0, 'Brazil'       );
-    @chart_regions.set_value(2, 1, 400);
-    @chart_regions.set_value(3, 0, 'Canada'       );
-    @chart_regions.set_value(3, 1, 500);
-    @chart_regions.set_value(4, 0, 'France'       );
-    @chart_regions.set_value(4, 1, 600);
-    @chart_regions.set_value(5, 0, 'RU'           );
-    @chart_regions.set_value(5, 1, 700);
+    data_table_regions = GoogleVisualr::GeoMap.new
+    data_table_regions.new_column('string'  , 'Country'   )
+    data_table_regions.new_column('number'  , 'Popularity')
+    data_table_regions.add_rows(6)
+    data_table_regions.set_cell(0, 0, 'Germany'      );
+    data_table_regions.set_cell(0, 1, 200);
+    data_table_regions.set_cell(1, 0, 'United States');
+    data_table_regions.set_cell(1, 1, 300);
+    data_table_regions.set_cell(2, 0, 'Brazil'       );
+    data_table_regions.set_cell(2, 1, 400);
+    data_table_regions.set_cell(3, 0, 'Canada'       );
+    data_table_regions.set_cell(3, 1, 500);
+    data_table_regions.set_cell(4, 0, 'France'       );
+    data_table_regions.set_cell(4, 1, 600);
+    data_table_regions.set_cell(5, 0, 'RU'           );
+    data_table_regions.set_cell(5, 1, 700);
 
     options = { :dataMode => 'regions' }
     options.each_pair do | key, value |
-      @chart_regions.send "#{key}=", value
+      data_table_regions.send "#{key}=", value
     end
 
     # Markers Example
-    @chart_markers = GoogleVisualr::GeoMap.new
-    @chart_markers.add_column('string'  , 'Country'   )
-    @chart_markers.add_column('number'  , 'Popularity')
-    @chart_markers.add_rows(6);
-    @chart_markers.set_value(0, 0, 'New York'     );
-    @chart_markers.set_value(0, 1, 200);
-    @chart_markers.set_value(1, 0, 'Boston'       );
-    @chart_markers.set_value(1, 1, 300);
-    @chart_markers.set_value(2, 0, 'Miami'        );
-    @chart_markers.set_value(2, 1, 400);
-    @chart_markers.set_value(3, 0, 'Chicago'      );
-    @chart_markers.set_value(3, 1, 500);
-    @chart_markers.set_value(4, 0, 'Los Angeles'  );
-    @chart_markers.set_value(4, 1, 600);
-    @chart_markers.set_value(5, 0, 'Houston'      );
-    @chart_markers.set_value(5, 1, 700);
+    data_table_markers = GoogleVisualr::GeoMap.new
+    data_table_markers.new_column('string'  , 'Country'   )
+    data_table_markers.new_column('number'  , 'Popularity')
+    data_table_markers.add_rows(6);
+    data_table_markers.set_cell(0, 0, 'New York'     );
+    data_table_markers.set_cell(0, 1, 200);
+    data_table_markers.set_cell(1, 0, 'Boston'       );
+    data_table_markers.set_cell(1, 1, 300);
+    data_table_markers.set_cell(2, 0, 'Miami'        );
+    data_table_markers.set_cell(2, 1, 400);
+    data_table_markers.set_cell(3, 0, 'Chicago'      );
+    data_table_markers.set_cell(3, 1, 500);
+    data_table_markers.set_cell(4, 0, 'Los Angeles'  );
+    data_table_markers.set_cell(4, 1, 600);
+    data_table_markers.set_cell(5, 0, 'Houston'      );
+    data_table_markers.set_cell(5, 1, 700);
 
     options = { :dataMode => 'markers', :region => 'US', :colors => ['0xFF8747', '0xFFB581', '0xc06000'] }
     options.each_pair do | key, value |
-      @chart_markers.send "#{key}=", value
+      data_table_markers.send "#{key}=", value
     end
 
   end
@@ -188,133 +198,130 @@ class ExamplesController < ApplicationController
   # http://code.google.com/apis/visualization/documentation/gallery/image_spark_line.html#Example
   def image_spark_line
 
-    @chart = GoogleVisualr::ImageSparkLine.new
-    @chart.add_column("number", "Revenue" )
-    @chart.add_column("number", "Licenses")
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column("number", "Revenue" )
+    data_table.new_column("number", "Licenses")
 
-    @chart.add_rows(10)
+    data_table.add_rows(10)
 
-    @chart.set_value(0,0,435)
-    @chart.set_value(1,0,438)
-    @chart.set_value(2,0,512)
-    @chart.set_value(3,0,460)
-    @chart.set_value(4,0,491)
-    @chart.set_value(5,0,487)
-    @chart.set_value(6,0,552)
-    @chart.set_value(7,0,511)
-    @chart.set_value(8,0,505)
-    @chart.set_value(9,0,509)
+    data_table.set_cell(0,0,435)
+    data_table.set_cell(1,0,438)
+    data_table.set_cell(2,0,512)
+    data_table.set_cell(3,0,460)
+    data_table.set_cell(4,0,491)
+    data_table.set_cell(5,0,487)
+    data_table.set_cell(6,0,552)
+    data_table.set_cell(7,0,511)
+    data_table.set_cell(8,0,505)
+    data_table.set_cell(9,0,509)
 
-    @chart.set_value(0,1,132)
-    @chart.set_value(1,1,131)
-    @chart.set_value(2,1,137)
-    @chart.set_value(3,1,142)
-    @chart.set_value(4,1,140)
-    @chart.set_value(5,1,139)
-    @chart.set_value(6,1,147)
-    @chart.set_value(7,1,146)
-    @chart.set_value(8,1,151)
-    @chart.set_value(9,1,149)
+    data_table.set_cell(0,1,132)
+    data_table.set_cell(1,1,131)
+    data_table.set_cell(2,1,137)
+    data_table.set_cell(3,1,142)
+    data_table.set_cell(4,1,140)
+    data_table.set_cell(5,1,139)
+    data_table.set_cell(6,1,147)
+    data_table.set_cell(7,1,146)
+    data_table.set_cell(8,1,151)
+    data_table.set_cell(9,1,149)
 
-    options = { :width => 120, :height => 40, :showAxisLines => false,  :showValueLabels => false, :labelPosition => 'left' }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :width => 120, :height => 40, :showAxisLines => false,  :showValueLabels => false, :labelPosition => 'left' }
+    @chart = GoogleVisualr::Image::ImageSparkLine.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/intensitymap.html
   def intensity_map
 
-    @chart = GoogleVisualr::IntensityMap.new
-    @chart.add_column('string', '', 'Country')
-    @chart.add_column('number', 'Population (mil)', 'a')
-    @chart.add_column('number', 'Area (km2)'      , 'b')
-    @chart.add_rows(5)
-    @chart.set_value(0, 0, 'CN')
-    @chart.set_value(0, 1, 1324)
-    @chart.set_value(0, 2, 9640821)
-    @chart.set_value(1, 0, 'IN')
-    @chart.set_value(1, 1, 1133)
-    @chart.set_value(1, 2, 3287263)
-    @chart.set_value(2, 0, 'US')
-    @chart.set_value(2, 1, 304 )
-    @chart.set_value(2, 2, 9629091)
-    @chart.set_value(3, 0, 'ID')
-    @chart.set_value(3, 1, 232 )
-    @chart.set_value(3, 2, 1904569)
-    @chart.set_value(4, 0, 'BR')
-    @chart.set_value(4, 1, 187 )
-    @chart.set_value(4, 2, 8514877)
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', '', 'Country')
+    data_table.new_column('number', 'Population (mil)', 'a')
+    data_table.new_column('number', 'Area (km2)'      , 'b')
+    data_table.add_rows(5)
+    data_table.set_cell(0, 0, 'CN')
+    data_table.set_cell(0, 1, 1324)
+    data_table.set_cell(0, 2, 9640821)
+    data_table.set_cell(1, 0, 'IN')
+    data_table.set_cell(1, 1, 1133)
+    data_table.set_cell(1, 2, 3287263)
+    data_table.set_cell(2, 0, 'US')
+    data_table.set_cell(2, 1, 304 )
+    data_table.set_cell(2, 2, 9629091)
+    data_table.set_cell(3, 0, 'ID')
+    data_table.set_cell(3, 1, 232 )
+    data_table.set_cell(3, 2, 1904569)
+    data_table.set_cell(4, 0, 'BR')
+    data_table.set_cell(4, 1, 187 )
+    data_table.set_cell(4, 2, 8514877)
+
+    opts   = {}
+    @chart = GoogleVisualr::Interactive::IntensityMap.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/linechart.html#Example
   def line_chart
 
-    @chart = GoogleVisualr::LineChart.new
-    @chart.add_column('string', 'Year')
-    @chart.add_column('number', 'Sales')
-    @chart.add_column('number', 'Expenses')
-    @chart.add_rows(4)
-    @chart.set_value(0, 0, '2004')
-    @chart.set_value(0, 1, 1000)
-    @chart.set_value(0, 2, 400)
-    @chart.set_value(1, 0, '2005')
-    @chart.set_value(1, 1, 1170)
-    @chart.set_value(1, 2, 460)
-    @chart.set_value(2, 0, '2006')
-    @chart.set_value(2, 1, 1500)
-    @chart.set_value(2, 2, 660)
-    @chart.set_value(3, 0, '2007')
-    @chart.set_value(3, 1, 1030)
-    @chart.set_value(3, 2, 540)
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Year')
+    data_table.new_column('number', 'Sales')
+    data_table.new_column('number', 'Expenses')
+    data_table.add_rows(4)
+    data_table.set_cell(0, 0, '2004')
+    data_table.set_cell(0, 1, 1000)
+    data_table.set_cell(0, 2, 400)
+    data_table.set_cell(1, 0, '2005')
+    data_table.set_cell(1, 1, 1170)
+    data_table.set_cell(1, 2, 460)
+    data_table.set_cell(2, 0, '2006')
+    data_table.set_cell(2, 1, 860)
+    data_table.set_cell(2, 2, 580)
+    data_table.set_cell(3, 0, '2007')
+    data_table.set_cell(3, 1, 1030)
+    data_table.set_cell(3, 2, 540)
 
-    options = { :width => 400, :height => 240, :title => 'Company Performance', :legend => 'bottom' }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :width => 400, :height => 240, :title => 'Company Performance', :legend => 'bottom' }
+    @chart = GoogleVisualr::Interactive::LineChart.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/map.html
   def map
 
-    @chart = GoogleVisualr::Map.new
-    @chart.add_column('number', 'Lat' )
-    @chart.add_column('number', 'Lon' )
-    @chart.add_column('string', 'Name')
-    @chart.add_rows(4)
-    @chart.set_cell(0, 0, 37.4232   )
-    @chart.set_cell(0, 1, -122.0853 )
-    @chart.set_cell(0, 2, 'Work'      )
-    @chart.set_cell(1, 0, 37.4289   )
-    @chart.set_cell(1, 1, -122.1697 )
-    @chart.set_cell(1, 2, 'University')
-    @chart.set_cell(2, 0, 37.6153   )
-    @chart.set_cell(2, 1, -122.3900 )
-    @chart.set_cell(2, 2, 'Airport'   )
-    @chart.set_cell(3, 0, 37.4422   )
-    @chart.set_cell(3, 1, -122.1731 )
-    @chart.set_cell(3, 2, 'Shopping'  )
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('number', 'Lat' )
+    data_table.new_column('number', 'Lon' )
+    data_table.new_column('string', 'Name')
+    data_table.add_rows(4)
+    data_table.set_cell(0, 0, 37.4232   )
+    data_table.set_cell(0, 1, -122.0853 )
+    data_table.set_cell(0, 2, 'Work'      )
+    data_table.set_cell(1, 0, 37.4289   )
+    data_table.set_cell(1, 1, -122.1697 )
+    data_table.set_cell(1, 2, 'University')
+    data_table.set_cell(2, 0, 37.6153   )
+    data_table.set_cell(2, 1, -122.3900 )
+    data_table.set_cell(2, 2, 'Airport'   )
+    data_table.set_cell(3, 0, 37.4422   )
+    data_table.set_cell(3, 1, -122.1731 )
+    data_table.set_cell(3, 2, 'Shopping'  )
 
-    options = { :showTip => true }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :showTip => true }
+    @chart = GoogleVisualr::Interactive::Map.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/motionchart.html#Example
   def motion_chart
 
-    @chart = GoogleVisualr::MotionChart.new
-    @chart.add_column('string', 'Fruit'   )
-    @chart.add_column('date'  , 'Date'    )
-    @chart.add_column('number', 'Sales'   )
-    @chart.add_column('number', 'Expenses')
-    @chart.add_column('string', 'Location')
-    @chart.add_rows([
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Fruit'   )
+    data_table.new_column('date'  , 'Date'    )
+    data_table.new_column('number', 'Sales'   )
+    data_table.new_column('number', 'Expenses')
+    data_table.new_column('string', 'Location')
+    data_table.add_rows([
       ['Apples' ,Date.parse("1988-01-01"),1000,300,'East'],
       ['Oranges',Date.parse("1988-01-01"),1150,200,'West'],
       ['Bananas',Date.parse("1988-01-01"),300 ,250,'West'],
@@ -323,21 +330,19 @@ class ExamplesController < ApplicationController
       ['Bananas',Date.parse("1989-07-01"),788 ,617,'West']
     ])
 
-    options = { :width => 600, :height => 300 }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
-
+    opts   = { :width => 600, :height => 300 }
+    @chart = GoogleVisualr::Interactive::MotionChart.new(data_table, opts)
+    
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/orgchart.html#Example
   def org_chart
 
-    @chart = GoogleVisualr::OrgChart.new
-    @chart.add_column('string', 'Name'   )
-    @chart.add_column('string', 'Manager')
-    @chart.add_column('string', 'ToolTip')
-    @chart.add_rows( [
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Name'   )
+    data_table.new_column('string', 'Manager')
+    data_table.new_column('string', 'ToolTip')
+    data_table.add_rows( [
       [ {:v => 'Mike', :f => 'Mike<div style="color:red; font-style:italic">President</div>'   }, ''    , 'The President' ],
       [ {:v => 'Jim' , :f => 'Jim<div style="color:red; font-style:italic">Vice President<div>'}, 'Mike', 'VP'            ],
       [ 'Alice'  , 'Mike', ''           ],
@@ -345,90 +350,85 @@ class ExamplesController < ApplicationController
       [ 'Carol'  , 'Bob' , ''           ]
     ] )
 
-    options = { :allowHtml => true }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :allowHtml => true }
+    @chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/piechart.html#Example
   def pie_chart
 
-    @chart = GoogleVisualr::PieChart.new
-    @chart.add_column('string', 'Task')
-    @chart.add_column('number', 'Hours per Day')
-    @chart.add_rows(5)
-    @chart.set_value(0, 0, 'Work'     )
-    @chart.set_value(0, 1, 11 )
-    @chart.set_value(1, 0, 'Eat'      )
-    @chart.set_value(1, 1, 2  )
-    @chart.set_value(2, 0, 'Commute'  )
-    @chart.set_value(2, 1, 2  )
-    @chart.set_value(3, 0, 'Watch TV' )
-    @chart.set_value(3, 1, 2  )
-    @chart.set_value(4, 0, 'Sleep'    )
-    @chart.set_value(4, 1, 7  )
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Task')
+    data_table.new_column('number', 'Hours per Day')
+    data_table.add_rows(5)
+    data_table.set_cell(0, 0, 'Work'     )
+    data_table.set_cell(0, 1, 11 )
+    data_table.set_cell(1, 0, 'Eat'      )
+    data_table.set_cell(1, 1, 2  )
+    data_table.set_cell(2, 0, 'Commute'  )
+    data_table.set_cell(2, 1, 2  )
+    data_table.set_cell(3, 0, 'Watch TV' )
+    data_table.set_cell(3, 1, 2  )
+    data_table.set_cell(4, 0, 'Sleep'    )
+    data_table.set_cell(4, 1, 7  )
 
-    options = { :width => 400, :height => 240, :title => 'My Daily Activities', :is3D => true }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :width => 400, :height => 240, :title => 'My Daily Activities', :is3D => true }
+    @chart = GoogleVisualr::Interactive::PieChart.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/scatterchart.html#Example
   def scatter_chart
 
-    @chart = GoogleVisualr::ScatterChart.new
-    @chart.add_column('number', 'Age')
-    @chart.add_column('number', 'Weight')
-    @chart.add_rows(6)
-    @chart.set_value( 0, 0, 8  )
-    @chart.set_value( 0, 1, 12 )
-    @chart.set_value( 1, 0, 4  )
-    @chart.set_value( 1, 1, 5.5)
-    @chart.set_value( 2, 0, 11 )
-    @chart.set_value( 2, 1, 14 )
-    @chart.set_value( 3, 0, 4  )
-    @chart.set_value( 3, 1, 5  )
-    @chart.set_value( 4, 0, 3  )
-    @chart.set_value( 4, 1, 3.5)
-    @chart.set_value( 5, 0, 6.5)
-    @chart.set_value( 5, 1, 7  )
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('number', 'Age')
+    data_table.new_column('number', 'Weight')
+    data_table.add_rows(6)
+    data_table.set_cell( 0, 0, 8  )
+    data_table.set_cell( 0, 1, 12 )
+    data_table.set_cell( 1, 0, 4  )
+    data_table.set_cell( 1, 1, 5.5)
+    data_table.set_cell( 2, 0, 11 )
+    data_table.set_cell( 2, 1, 14 )
+    data_table.set_cell( 3, 0, 4  )
+    data_table.set_cell( 3, 1, 4.5)
+    data_table.set_cell( 4, 0, 3  )
+    data_table.set_cell( 4, 1, 3.5)
+    data_table.set_cell( 5, 0, 6.5)
+    data_table.set_cell( 5, 1, 7  )
 
-    options = { :width => 400, :height => 240, :titleX => 'Age', :titleY => 'Weight', :legend => 'none', :pointSize => 5 }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :width => 400, :height => 240, :title => 'Age vs. Weight comparison',
+               :hAxis => { :title => 'Age'    , :minValue => 0, :maxValue => 15 },
+               :vAxis => { :title => 'Weight' , :minValue => 0, :maxValue => 15 },
+               :legend => 'none' }
+    @chart = GoogleVisualr::Interactive::ScatterChart.new(data_table, opts)
 
   end
 
   # http://code.google.com/apis/visualization/documentation/gallery/table.html#Example
   def table
 
-    @chart = GoogleVisualr::Table.new
-    @chart.add_column('string'  , 'Name')
-    @chart.add_column('number'  , 'Salary')
-    @chart.add_column('boolean' , 'Full Time Employee')
-    @chart.add_rows(4)
-    @chart.set_cell(0, 0, 'Mike'  )
-    @chart.set_cell(0, 1, 10000, '$10,000')
-    @chart.set_cell(0, 2, true  )
-    @chart.set_cell(1, 0, 'Jim'   )
-    @chart.set_cell(1, 1, 8000, '$8,000'  )
-    @chart.set_cell(1, 2, false )
-    @chart.set_cell(2, 0, 'Alice' )
-    @chart.set_cell(2, 1, 12500, '$12,500')
-    @chart.set_cell(2, 2, true  )
-    @chart.set_cell(3, 0, 'Bob'   )
-    @chart.set_cell(3, 1, 7000, '$7,000'  )
-    @chart.set_cell(3, 2, true  )
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string'  , 'Name')
+    data_table.new_column('number'  , 'Salary')
+    data_table.new_column('boolean' , 'Full Time Employee')
+    data_table.add_rows(4)
+    data_table.set_cell(0, 0, 'Mike'  )
+    data_table.set_cell(0, 1, {:v => 10000, :f => '$10,000'})
+    data_table.set_cell(0, 2, true  )
+    data_table.set_cell(1, 0, 'Jim'   )
+    data_table.set_cell(1, 1, {:v => 8000 , :f => '$8,000' })
+    data_table.set_cell(1, 2, false )
+    data_table.set_cell(2, 0, 'Alice' )
+    data_table.set_cell(2, 1, {:v => 12500, :f => '$12,500'})
+    data_table.set_cell(2, 2, true  )
+    data_table.set_cell(3, 0, 'Bob'   )
+    data_table.set_cell(3, 1, {:v => 7000 , :f => '$7,000' })
+    data_table.set_cell(3, 2, true  )
 
-    options = { :width => 600, :showRowNumber => true }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :width => 600, :showRowNumber => true }
+    @chart = GoogleVisualr::Interactive::Table.new(data_table, opts)
 
   end
 

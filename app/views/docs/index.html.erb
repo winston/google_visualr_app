@@ -113,7 +113,7 @@
     <hr>
     <h3>Example</h3>
     <div id='chart'></div>
-    <%= @chart.render('chart') %>
+    <%= raw @chart.to_js('chart') %>
   </div>
 
   <div class='append-bottom'>
@@ -414,7 +414,7 @@
     <p>
       <code>
         # Renders chart in Div with ID chart<br/>
-        @chart.render('chart')
+        raw @chart.to_js('chart')
       </code>
     </p>
   </div>

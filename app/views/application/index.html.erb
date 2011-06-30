@@ -121,7 +121,7 @@
   <p>
     <code>
       &lt;div id='chart'&gt;&lt;/div&gt;<br/>
-      &lt;%= @chart.render('chart') %&gt;
+      &lt;%= raw @chart.to_js('chart') %&gt;
     </code>
   </p>
 </div>

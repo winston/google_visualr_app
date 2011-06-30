@@ -17,7 +17,7 @@
   <h3>Example</h3>
   <!-- Specify the size of the Container element explicitly! -->
   <div id='chart' style='width: 700px; height: 240px;'></div>
-  <%= @chart.render('chart') %>
+  <%= raw @chart.to_js('chart') %>
 </div>
 <div class='append-bottom'>
   <hr>
