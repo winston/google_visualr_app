@@ -2,7 +2,7 @@ class ExamplesController < ApplicationController
 
   layout "default"
 
-  # http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/annotatedtimeline.html#Example
   def annotated_time_line
 
     data_table = GoogleVisualr::DataTable.new
@@ -27,7 +27,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/areachart.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/areachart.html#Example
   def area_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -46,7 +46,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/barchart.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/barchart.html#Example
   def bar_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -72,7 +72,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/columnchart.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/columnchart.html#Example
   def column_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -98,7 +98,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/gauge.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/gauge.html#Example
   def gauge
 
     data_table = GoogleVisualr::DataTable.new
@@ -118,7 +118,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/geochart.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/geochart.html#Example
   def geo_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -144,7 +144,7 @@ class ExamplesController < ApplicationController
   end
 
 
-  # http://code.google.com/apis/visualization/documentation/gallery/geomap.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/geomap.html#Example
   def geomap
 
     # Regions Example
@@ -195,7 +195,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/image_spark_line.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/image_spark_line.html#Example
   def image_spark_line
 
     data_table = GoogleVisualr::DataTable.new
@@ -231,7 +231,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/intensitymap.html
+  # http://code.google.com/apis/chart/interactive/docs/gallery/intensitymap.html
   def intensity_map
 
     data_table = GoogleVisualr::DataTable.new
@@ -260,7 +260,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/linechart.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/linechart.html#Example
   def line_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -286,7 +286,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/map.html
+  # http://code.google.com/apis/chart/interactive/docs/gallery/map.html
   def map
 
     data_table = GoogleVisualr::DataTable.new
@@ -312,7 +312,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/motionchart.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/motionchart.html#Example
   def motion_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -335,7 +335,7 @@ class ExamplesController < ApplicationController
     
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/orgchart.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/orgchart.html#Example
   def org_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -355,7 +355,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/piechart.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/piechart.html#Example
   def pie_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -378,7 +378,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/scatterchart.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/scatterchart.html#Example
   def scatter_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -406,7 +406,7 @@ class ExamplesController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/gallery/table.html#Example
+  # http://code.google.com/apis/chart/interactive/docs/gallery/table.html#Example
   def table
 
     data_table = GoogleVisualr::DataTable.new
