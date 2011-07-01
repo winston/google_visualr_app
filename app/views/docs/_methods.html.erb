@@ -40,7 +40,7 @@
       <span class='cem'>label</span> [Optional] A string value that some charts display for this column. Example: label:'Height'
     </li>
     <li>
-      <span class='cem'>id</span> [Optional] A unique (basic alphanumeric) string ID of the column. Be careful not to choose a JavaScript keyword. Example: id:'col_0'
+      <span class='cem'>id</span> [Optional] A unique (basic alphanumeric) string ID of the column. Be careful not to choose a JavaScript keyword. Example: id:'col_1'
     </li>
   </ul>
   <p>
@@ -160,7 +160,18 @@
       <span class='cem'>column_index</span> [Required] A number greater than or equal to zero, but smaller than the total number of columns.
     </li>
     <li>
-      <span class='cem'>value</span> [Required] The cell value. The data type should match the column data type. You can specify a value for a cell (e.g. 'hi') or specify a formatted value using cell objects (e.g. {v:55, f:'Fifty-five'}) as described in the constructor section.
+      <span class='cem'>value</span> [Required] The cell value.
+      <ul>
+        <li>
+          The data type should match the column data type.
+        </li>
+        <li>
+          Specify a value for a cell (e.g. 'hi').
+        </li>
+        <li>
+          Or specify a formatted value using cell objects (e.g. {v:55, f:'Fifty-five'}).
+        </li>
+      </ul>
     </li>
   </ul>
   <p>
@@ -193,46 +204,6 @@
 
       # Passes in 3 formatters<br/>
       data_table.format(formatter_1, formatter_2, formatter_2)
-    </code>
-  </p>
-</div>
-
-<div class='append-bottom'>
-  <h5><span class='cem'>options=(options)</span></h5>
-  <p>
-    Sets chart configuration options with a hash.
-  </p>
-  <h6>Parameters</h6>
-  <p>
-  <ul>
-    <li>
-      <span class='cem'>options</span> [Required] A hash of configuration options.
-    </li>
-  </ul>
-  </p>
-  <p>
-    <code>
-      # Sets configuration options<br/>
-      data_table.options = { :width => 400, :height => 240, :title => 'Company Performance', :legend => 'bottom' }
-    </code>
-  </p>
-</div>
-
-<div class='append-bottom'>
-  <h5><span class='cem'>to_js(div_id)</span></h5>
-  <p>
-    Generates JavaScript and renders the Google chart in the final HTML output.
-  </p>
-  <h6>Parameters</h6>
-  <ul>
-    <li>
-      <span class='cem'>div_id</span> [Required] The ID of the DIV element that the Google chart should be rendered in.
-    </li>
-  </ul>
-  <p>
-    <code>
-      # Renders chart in Div with ID chart<br/>
-      raw @chart.to_js('chart')
     </code>
   </p>
 </div>
