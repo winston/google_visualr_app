@@ -1,0 +1,89 @@
+<div id='constructor'>
+
+  <h3 class='sub'>Constructors</h3>
+  <p>
+    GoogleVisualr::DataTable have two constructors.
+  </p>
+  <p>
+    <code>
+      # Creates an empty data_table instance           <br/>
+      data_table = GoogleVisualr::DataTable.new        <br/><br/>
+      # Creates a populated data_table instance        <br/>
+      data_table = GoogleVisualr::DataTable.new(<em>data</em>)
+    </code>
+  </p>
+  <h6>GoogleVisualr::DataTable.new</h6>
+  <p>
+    Creates an empty data_table instance. Use <em>new_column/s</em>, <em>add_row/s</em> and <em>set_cell</em> methods to populate the data_table.
+  </p>
+  <h6>GoogleVisualr::DataTable.new(<em>data_object</em>)</h6>
+  <p>
+    Creates a data_table by passing a JavaScript-string-literal like <em>data object</em> into the data parameter. This object can contain formatting options.
+  </p>
+
+  <div class ='append-bottom'>
+    <hr>
+    <h3>Syntax Description of a Data Object</h3>
+    <p>
+      The data object consists of two required top-level properties, cols and rows.
+    </p>
+
+    <h5><span class='cem'>cols</span> property</h5>
+    <p>
+      <span class='cem'>cols</span> is an array of objects describing the ID and type of each column. Each property is an object with the following properties (case-sensitive):
+    </p>
+    <ul>
+      <li>
+        <span class='cem'>type</span> [Required] The data type of the data in the column. Supports the following string values:
+        <ul>
+          <li>
+            'string'    - String value. Example values: v:'foo', :v:'bar'
+          </li>
+          <li>
+            'number'    - Number value. Example values: v:7, v:3.14, v:-55
+          </li>
+          <li>
+            'boolean'   - Boolean value ('true' or 'false'). Example values: v:true, v:false
+          </li>
+          <li>
+            'date'      - Date object, with the time truncated. Example value: v:Date.parse('2010-01-01')
+          </li>
+          <li>
+            'datetime'  - DateTime/Time object, time inclusive. Example value: v:DateTime.parse('2010-01-01 14:20:25')
+          </li>
+          <li>
+            'timeofday' - Array of 3 numbers or 4 numbers, [Hour,Minute,Second,(Optional) Milliseconds]. Example value: v:[8, 15, 0]
+          </li>
+        </ul>
+      </li>
+      <li>
+        <span class='cem'>label</span> [Optional] A string value that some visualizations display for this column. Example: label:'Height'
+      </li>
+      <li>
+        <span class='cem'>id</span> [Optional] A unique (basic alphanumeric) string ID of the column. Be careful not to choose a JavaScript keyword. Example: id:'col_1'
+      </li>
+    </ul>
+
+    <h5><span class='cem'>rows</span> property</h5>
+    <p>
+      The rows property holds an array of row objects. Each row object has one required property called <span class='cem'>c</span>, which is an array of cells in that row.
+    </p>
+    <p>
+      Each cell in the table is described by an object with the following properties:
+    </p>
+    <ul>
+      <li>
+        <span class='cem'>v</span> [Optional] The cell value. The data type should match the column data type.
+      </li>
+      <li>
+        <span class='cem'>f</span> [Optional] A string version of the <span class='cem'>v</span> value, formatted strictly for display only. If omitted, a string version of v will be used.
+      </li>
+    </ul>
+    <p>
+      Cells in the row array should be in the same order as their column descriptions in cols.
+    </p>
+    <p>
+      To indicate a <em>null</em> cell, you can either specify "null", or set empty string for a cell in an array, or omit trailing array members. So, to indicate a row with null for the first two cells, you could specify [ '', '', {cell_val} ] or [ null, null, {cell_val} ].
+    </p>
+  </div>
+</div>

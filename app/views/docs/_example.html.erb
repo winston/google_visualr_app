@@ -1,0 +1,27 @@
+<div id="example">
+  <h3 class="sub">Example</h3>
+  <p>
+    Let's attempt to recreate this chart. Look at the code below!
+  </p>
+
+  <div id='chart'></div>
+  <%= raw @chart.to_js('chart') %>
+
+  <br/>
+  <div class='append-bottom'>
+    <hr>
+    <h3>Code</h3>
+    <div>
+      <p>
+        In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
+      </p>
+      <script src="https://gist.github.com/1058132.js?file=controller.rb"></script>
+    </div>
+    <div>
+      <p>
+        In your view, use the <em>to_js</em> method to generate JavaScript, during rendering of the view.
+      </p>
+      <script src="https://gist.github.com/1058132.js?file=view.html.erb"></script>
+    </div>
+  </div>
+</div>

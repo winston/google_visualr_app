@@ -1,0 +1,240 @@
+<div id='Methods'>
+
+<h3 class='sub'>Methods</h3>
+<p>
+  Note: The methods listed here are not exhaustive, and may not be updated timely. Please also refer to the (documented) source for more details.
+</p>
+<hr/>
+
+<div class='append-bottom'>
+  <h5><span class='cem'>new_column(type [,label [,id]])</span></h5>
+  <p>
+    Adds a new column to the data_table.
+  </p>
+  <h6>Parameters</h6>
+  <ul>
+    <li>
+      <span class='cem'>type</span> [Required] The data type of the data in the column. Supports the following string values:
+      <ul>
+        <li>
+          'string'    - String value. Example values: v:'foo', :v:'bar'
+        </li>
+        <li>
+          'number'    - Number value. Example values: v:7, v:3.14, v:-55
+        </li>
+        <li>
+          'boolean'   - Boolean value ('true' or 'false'). Example values: v:true, v:false
+        </li>
+        <li>
+          'date'      - Date object, with the time truncated. Example value: v:Date.parse('2010-01-01')
+        </li>
+        <li>
+          'datetime'  - DateTime/Time object, time inclusive. Example value: v:DateTime.parse('2010-01-01 14:20:25')
+        </li>
+        <li>
+          'timeofday' - Array of 3 numbers or 4 numbers, [Hour,Minute,Second,(Optional) Milliseconds]. Example value: v:[8, 15, 0]
+        </li>
+      </ul>
+    </li>
+    <li>
+      <span class='cem'>label</span> [Optional] A string value that some charts display for this column. Example: label:'Height'
+    </li>
+    <li>
+      <span class='cem'>id</span> [Optional] A unique (basic alphanumeric) string ID of the column. Be careful not to choose a JavaScript keyword. Example: id:'col_0'
+    </li>
+  </ul>
+  <p>
+    <code>
+      # Adds a column with data type and label<br/>
+      data_table.new_column('string', 'Name')
+    </code>
+  </p>
+</div>
+
+<div class='append-bottom'>
+  <hr/>
+  <h5><span class='cem'>new_columns(columns)</span></h5>
+  <p>
+    Adds multiple columns to the data_table.
+  </p>
+  <h6>Parameters</h6>
+  <ul>
+    <li>
+      <span class='cem'>columns</span> [Required] An array of column objects {:type, :label, :id}. Calls <em>new_column</em> for each column object.
+    </li>
+  </ul>
+  <p>
+    <code>
+      # Adds 2 columns with data type and label<br/>
+      data_table.new_columns( [ { :type => 'string', :label => 'Name' }, { :type => 'number', :label => 'Age' }  ] )
+    </code>
+  </p>
+</div>
+
+<div class='append-bottom'>
+  <hr/>
+  <h5><span class='cem'>add_row(row)</span></h5>
+  <p>
+    Adds a new row to the data_table. Call method without any parameters to add an empty row, otherwise, call method with a row object.
+  </p>
+  <h6>Parameters</h6>
+  <ul>
+    <li>
+      <span class='cem'>row</span> [Optional] An array of cell values specifying the data for the new row.
+      <ul>
+        <li>
+          You can specify a value for a cell (e.g. 'hi') or specify a formatted value using cell objects (e.g. {v:55, f:'Fifty-five'}) as described in the constructor section.
+        </li>
+        <li>
+          You can mix simple values and cell objects in the same method call.
+        </li>
+        <li>
+          To create an empty cell, use nil or empty string.
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    <code>
+      # Adds an empty row<br/>
+      data_table.add_row()<br/><br/>
+
+      # Adds a row with a string and a date value<br/>
+      data_table.add_row( [ 'Hermione', Date.parse('1999-01-01') ] )<br/><br/>
+
+      # Adds a row with two cells; second cell with a formatted value<br/>
+      data_table.add_row( [ 'Hermione', {v: Date.parse('1999-01-01'), f: 'January First, Nineteen ninety-nine'} ] )<br/><br/>
+
+      data_table.add_row( [ 'Col1Val', nil, 'Col3Val' ] ) // 2nd column is empty<br/>
+      data_table.add_row( [ 'Col1Val', '' , 'Col3Val' ] ) // 2nd column is empty
+    </code>
+  </p>
+</div>
+
+<div class='append-bottom'>
+  <hr/>
+  <h5><span class='cem'>add_rows(array_or_num)</span></h5>
+  <p>
+    Adds multiple rows to the data_table. You can call this method with data to populate a set of new rows or create new empty rows.
+  </p>
+  <h6>Parameters</h6>
+  <ul>
+    <li>
+      <span class='cem'>array_or_num</span> [Required] Either an array or a number.
+      <ul>
+        <li>
+          Array: An array of row objects used to populate a set of new rows. Each row is an object as described in add_row().
+        </li>
+        <li>
+          Number: A number specifying the number of new empty rows to create.
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    <code>
+      # Adds 2 rows<br/>
+      data_table.add_rows([<br/>
+      ['John', 18],<br/>
+      ['Jill', 22] <br/>
+      ])<br/><br/>
+
+      # Adds 5 empty rows<br/>
+      data_table.add_rows(5)
+    </code>
+  </p>
+</div>
+
+<div class='append-bottom'>
+  <hr/>
+  <h5><span class='cem'>set_cell(row_index, column_index, value)</span></h5>
+  <p>
+    Sets the value (and formatted value) of a cell.
+  </p>
+  <h6>Parameters</h6>
+  <ul>
+    <li>
+      <span class='cem'>row_index</span> [Required] A number greater than or equal to zero, but smaller than the total number of rows.
+    </li>
+    <li>
+      <span class='cem'>column_index</span> [Required] A number greater than or equal to zero, but smaller than the total number of columns.
+    </li>
+    <li>
+      <span class='cem'>value</span> [Required] The cell value. The data type should match the column data type. You can specify a value for a cell (e.g. 'hi') or specify a formatted value using cell objects (e.g. {v:55, f:'Fifty-five'}) as described in the constructor section.
+    </li>
+  </ul>
+  <p>
+    <code>
+      # Sets a cell without a formatted value<br/>
+      data_table.set_cell(0, 0, 'John')<br/><br/>
+
+      # Sets a cell with a formatted value<br/>
+      data_table.set_cell(0, 1, {:v => 18, :f => '18 years old'})
+    </code>
+  </p>
+</div>
+
+<div class='append-bottom'>
+  <hr/>
+  <h5><span class='cem'>format(formatter [, formatter]*)</span></h5>
+  <p>
+    Applies one or more formatters to the visualization to format the columns as specified by the formatter/s.
+  </p>
+  <h6>Parameters</h6>
+  <ul>
+    <li>
+      <span class='cem'>formatter/s</span> [Required] One, or an array of <%= link_to "formatters", :controller => 'docs', :action => 'formatters' %>.
+    </li>
+  </ul>
+  <p>
+    <code>
+      # Passes in 1 formatter<br/>
+      data_table.format(formatter)<br/><br/>
+
+      # Passes in 3 formatters<br/>
+      data_table.format(formatter_1, formatter_2, formatter_2)
+    </code>
+  </p>
+</div>
+
+<div class='append-bottom'>
+  <h5><span class='cem'>options=(options)</span></h5>
+  <p>
+    Sets chart configuration options with a hash.
+  </p>
+  <h6>Parameters</h6>
+  <p>
+  <ul>
+    <li>
+      <span class='cem'>options</span> [Required] A hash of configuration options.
+    </li>
+  </ul>
+  </p>
+  <p>
+    <code>
+      # Sets configuration options<br/>
+      data_table.options = { :width => 400, :height => 240, :title => 'Company Performance', :legend => 'bottom' }
+    </code>
+  </p>
+</div>
+
+<div class='append-bottom'>
+  <h5><span class='cem'>to_js(div_id)</span></h5>
+  <p>
+    Generates JavaScript and renders the visualization in the final HTML output.
+  </p>
+  <h6>Parameters</h6>
+  <ul>
+    <li>
+      <span class='cem'>div_id</span> [Required] The ID of the DIV element that the visualization should be rendered in.
+    </li>
+  </ul>
+  <p>
+    <code>
+      # Renders chart in Div with ID chart<br/>
+      raw @chart.to_js('chart')
+    </code>
+  </p>
+</div>
+
+</div>
