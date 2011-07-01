@@ -2,7 +2,7 @@ class DocsController < ApplicationController
 
   layout "default"
 
-  # http://code.google.com/apis/visualization/documentation/reference.html
+  # http://code.google.com/apis/chart/interactive/docs/reference.html
   def index
 
     ##############################
@@ -23,7 +23,7 @@ class DocsController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/visualization/documentation/reference.html#formatters
+  # http://code.google.com/apis/chart/interactive/docs/reference.html#formatters
   def formatters
 
     ##############################

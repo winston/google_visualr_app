@@ -1,21 +1,27 @@
 = Overview
 
-This is the GoogleVisualr reference site, written in Rails.
+This is the GoogleVisualr API Reference site, written in Rails 3.
 
 To view this site:
 * Visit {http://googlevisualr.heroku.com}[http://googlevisualr.heroku.com]
-* Clone this repository, and run this site locally with <em>script/server</em>
+* Clone this repository, and run this site locally with <em>rails s</em>
 
 = Resources
 
-* {Google Visualization API}[http://code.google.com/apis/visualization/documentation/]
-* {GoogleVisualr Source}[http://github.com/winston/google_visualr]
+* {Google Chart Tools}[http://code.google.com/apis/chart/index.html]
+* {GoogleVisualr Source}[https://github.com/winston/google_visualr]
+
+= Contributing
+
+Do you think you can write better documentation? Then help me improve this GoogleVisualr API Reference site!
+
+I welcome all pull requests for new or improved examples, or language fixes. Thanks in advance!
 
 = Author
 
-GoogleVisualr is maintained by {Winston Teo}[mailto:winstonyw+googlevisualr@gmail.com], and his Ninja Penguin.
+GoogleVisualr is maintained by {Winston Teo}[mailto:winstonyw+googlevisualr@gmail.com].
 
-Who is Winston Teo? Find out more on {WinstonYW}[http://www.winstonyw.com], {LinkedIn}[http://sg.linkedin.com/in/winstonyw], or {follow Winston on Twitter}[http://www.twitter.com/winstonyw].
+Who is Winston Teo? {You should follow Winston on Twitter}[http://www.twitter.com/winstonyw] or find out more on {WinstonYW}[http://www.winstonyw.com] and {LinkedIn}[http://sg.linkedin.com/in/winstonyw].
 
 = License
 
