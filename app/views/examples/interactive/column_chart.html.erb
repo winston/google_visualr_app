@@ -20,13 +20,13 @@
   <h3>Code</h3>
   <div>
     <p>
-      In your controller, create your chart object, and add column headers and row values, then set any configuration options.
+      In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
     <script src="https://gist.github.com/1057945.js?file=controller.rb"></script>
   </div>
   <div>
     <p>
-      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript, as seen <%= link_to "here", "http://code.google.com/apis/chart/interactive/docs/gallery/columnchart.html#Example" %>, during rendering of the view.
+      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/columnchart.html#Example" %>, during rendering of the view.
     </p>
     <script src="https://gist.github.com/1057945.js?file=view.html.erb"></script>
   </div>

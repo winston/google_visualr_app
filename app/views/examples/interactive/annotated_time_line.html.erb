@@ -9,7 +9,7 @@
     Please refer to <%= link_to "Google's documentation", "http://code.google.com/apis/chart/interactive/docs/gallery/annotatedtimeline.html" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
   </p>
   <p>
-    Important: Please specify the height and width of the div element explicitly.
+    Important: Please specify the height and width of the div element explicitly in the view.
   </p>
 </div>
 <div class='append-bottom'>
@@ -24,13 +24,13 @@
   <h3>Code</h3>
   <div>
     <p>
-      In your controller, create your chart object, and add column headers and row values, then set any configuration options.
+      In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
     <script src="https://gist.github.com/1057942.js?file=controller.rb"></script>
   </div>
   <div>
     <p>
-      In your view, use the <em>chart.render(div_id)</em> method to generate JavaScript, as seen <%= link_to "here", "http://code.google.com/apis/chart/interactive/docs/gallery/annotatedtimeline.html#Example" %>, during rendering of the view.
+      In your view, use the <em>to_js</em> method to generate <%= link_to "JavasScript", "http://code.google.com/apis/chart/interactive/docs/gallery/annotatedtimeline.html#Example" %>, during rendering of the view.
     </p>
     <script src="https://gist.github.com/1057942.js?file=view.html.erb"></script>
   </div>
