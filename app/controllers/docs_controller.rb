@@ -7,21 +7,19 @@ class DocsController < ApplicationController
 
     ##############################
     # Table with Constructor Format
-    @chart  = GoogleVisualr::Table.new({
-                :cols =>  [ { :id => 'A', :label => 'NEW A'  , :type => 'string' },
-                            { :id => 'B', :label => 'B-label', :type => 'number' },
-                            { :id => 'C', :label => 'C-label', :type => 'date'   }
-                          ],
-                :rows =>  [ { :c => [ {:v => 'a'}, {:v => 1.0, :f => 'One'}  , {:v => Date.parse('2008-02-28 00:31:26'), :f => '2/28/08 12:31 AM'} ] },
-                            { :c => [ {:v => 'b'}, {:v => 2.0, :f => 'Two'}  , {:v => Date.parse('2008-03-30 00:31:26'), :f => '3/30/08 12:31 AM'} ] },
-                            { :c => [ {:v => 'c'}, {:v => 3.0, :f => 'Three'}, {:v => Date.parse('2008-04-30 00:31:26'), :f => '4/30/08 12:31 AM'} ] }
-                          ]
-              })
+    data_table  = GoogleVisualr::DataTable.new({
+                    :cols =>  [ { :id => 'A', :label => 'NEW A'  , :type => 'string' },
+                                { :id => 'B', :label => 'B-label', :type => 'number' },
+                                { :id => 'C', :label => 'C-label', :type => 'date'   }
+                              ],
+                    :rows =>  [ { :c => [ {:v => 'a'}, {:v => 1.0, :f => 'One'}  , {:v => Date.parse('2008-02-28 00:31:26'), :f => '2/28/08 12:31 AM'} ] },
+                                { :c => [ {:v => 'b'}, {:v => 2.0, :f => 'Two'}  , {:v => Date.parse('2008-03-30 00:31:26'), :f => '3/30/08 12:31 AM'} ] },
+                                { :c => [ {:v => 'c'}, {:v => 3.0, :f => 'Three'}, {:v => Date.parse('2008-04-30 00:31:26'), :f => '4/30/08 12:31 AM'} ] }
+                              ]
+                  })
 
-    options = { :width => 600, :allowHtml => true, :showRowNumber => true }
-    options.each_pair do | key, value |
-      @chart.send "#{key}=", value
-    end
+    opts   = { :width => 600, :allowHtml => true, :showRowNumber => true }
+    @chart = GoogleVisualr::Interactive::Table.new(data_table, opts)
 
   end
 
@@ -30,10 +28,10 @@ class DocsController < ApplicationController
 
     ##############################
     # Table with Arrow Formatter
-    @chart_1 = GoogleVisualr::Table.new
-    @chart_1.add_column('string', 'Department'      )
-    @chart_1.add_column('number', 'Revenues Change' )
-    @chart_1.add_rows([
+    data_table_1 = GoogleVisualr::DataTable.new
+    data_table_1.new_column('string', 'Department'      )
+    data_table_1.new_column('number', 'Revenues Change' )
+    data_table_1.add_rows([
       ['Shoes'      , { :v => 12   , :f => '12.0%' }],
       ['Sports'     , { :v => -7.3 , :f => '-7.3%' }],
       ['Toys'       , { :v => 0    , :f => '0%'    }],
@@ -41,22 +39,20 @@ class DocsController < ApplicationController
       ['Food'       , { :v => 22   , :f => '22.0%' }]
     ])
 
-    options = { :width => 600, :allowHtml => true, :showRowNumber => true }
-    options.each_pair do | key, value |
-      @chart_1.send "#{key}=", value
-    end
-
     formatter = GoogleVisualr::ArrowFormat.new
     formatter.columns(1) # Apply to 2nd Column
 
-    @chart_1.format(formatter)
+    data_table_1.format(formatter)
+
+    opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+    @chart_1 = GoogleVisualr::Interactive::Table.new(data_table_1, opts)
 
     ##############################
     # Table with Bar Formatter
-    @chart_2 = GoogleVisualr::Table.new
-    @chart_2.add_column('string', 'Department'      )
-    @chart_2.add_column('number', 'Revenues Change' )
-    @chart_2.add_rows([
+    data_table_2 = GoogleVisualr::DataTable.new
+    data_table_2.new_column('string', 'Department'      )
+    data_table_2.new_column('number', 'Revenues Change' )
+    data_table_2.add_rows([
       ['Shoes'      , 10700 ],
       ['Sports'     , -15400],
       ['Toys'       , 12500 ],
@@ -64,23 +60,21 @@ class DocsController < ApplicationController
       ['Food'       , 22600 ],
       ['Art'        , 1100  ]
     ])
-
-    options = { :width => 600, :allowHtml => true, :showRowNumber => true }
-    options.each_pair do | key, value |
-      @chart_2.send "#{key}=", value
-    end
 
     formatter = GoogleVisualr::BarFormat.new( { :width => 150 } )
     formatter.columns(1) # Apply to 2nd Column
 
-    @chart_2.format(formatter)
+    data_table_2.format(formatter)
+
+    opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+    @chart_2 = GoogleVisualr::Interactive::Table.new(data_table_2, opts)
 
     ##############################
     # Table with Color Format
-    @chart_3 = GoogleVisualr::Table.new
-    @chart_3.add_column('string', 'Department'      )
-    @chart_3.add_column('number', 'Revenues Change' )
-    @chart_3.add_rows([
+    data_table_3 = GoogleVisualr::DataTable.new
+    data_table_3.new_column('string', 'Department'      )
+    data_table_3.new_column('number', 'Revenues Change' )
+    data_table_3.add_rows([
       ['Shoes'      , 10700 ],
       ['Sports'     , -15400],
       ['Toys'       , 12500 ],
@@ -88,55 +82,51 @@ class DocsController < ApplicationController
       ['Food'       , 22600 ],
       ['Art'        , 1100  ]
     ])
-
-    options = { :width => 600, :allowHtml => true, :showRowNumber => true }
-    options.each_pair do | key, value |
-      @chart_3.send "#{key}=", value
-    end
 
     formatter = GoogleVisualr::ColorFormat.new
     formatter.add_range( -20000, 0   , 'white' , 'orange'  )
     formatter.add_range( 20000 , nil , 'red'   , '#33ff33' )
     formatter.columns(1) # Apply to 2nd Column
 
-    @chart_3.format(formatter)
+    data_table_3.format(formatter)
+
+    opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+    @chart_3 = GoogleVisualr::Interactive::Table.new(data_table_3, opts)
 
     ##############################
     # Table with Date Format
-    @chart_4 = GoogleVisualr::Table.new
-    @chart_4.add_column('string', 'Employee Name')
-    @chart_4.add_column('date', 'Start Date (L)' )
-    @chart_4.add_column('date', 'Start Date (M)' )
-    @chart_4.add_column('date', 'Start Date (S)' )
-    @chart_4.add_rows([
+    data_table_4 = GoogleVisualr::DataTable.new
+    data_table_4.new_column('string', 'Employee Name')
+    data_table_4.new_column('date', 'Start Date (L)' )
+    data_table_4.new_column('date', 'Start Date (M)' )
+    data_table_4.new_column('date', 'Start Date (S)' )
+    data_table_4.add_rows([
       ['Mike' , Date.parse('2008-02-28 00:31:26'), Date.parse('2008-02-28 00:31:26'), Date.parse('2008-02-28 00:31:26') ],
       ['Bob'  , Date.parse('2007-06-01 00:00:00'), Date.parse('2007-06-01 00:00:00'), Date.parse('2007-06-01 00:00:00') ],
       ['Alice', Date.parse('2006-08-16'), Date.parse('2006-08-16'), Date.parse('2006-08-16') ],
     ])
 
-    options = { :width => 600, :allowHtml => true, :showRowNumber => true }
-    options.each_pair do | key, value |
-      @chart_4.send "#{key}=", value
-    end
-
     # Create 3 x Formatters
-    formatt_L = GoogleVisualr::DateFormat.new( { :formatType => 'long'   } )
-    formatt_M = GoogleVisualr::DateFormat.new( { :formatType => 'medium' } )
-    formatt_S = GoogleVisualr::DateFormat.new( { :formatType => 'short'  } )
+    formatter_L = GoogleVisualr::DateFormat.new( { :formatType => 'long'   } )
+    formatter_M = GoogleVisualr::DateFormat.new( { :formatType => 'medium' } )
+    formatter_S = GoogleVisualr::DateFormat.new( { :formatType => 'short'  } )
 
     # Format Columns
-    formatt_L.columns(1) # Apply to 2nd Column
-    formatt_M.columns(2) # Apply to 3rd Column
-    formatt_S.columns(3) # Apply to 4th Column
+    formatter_L.columns(1) # Apply to 2nd Column
+    formatter_M.columns(2) # Apply to 3rd Column
+    formatter_S.columns(3) # Apply to 4th Column
 
-    @chart_4.format( formatt_L, formatt_M, formatt_S )
+    data_table_4.format( formatter_L, formatter_M, formatter_S )
+
+    opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+    @chart_4 = GoogleVisualr::Interactive::Table.new(data_table_4, opts)
 
     ##############################
     # Table with Number Format
-    @chart_5 = GoogleVisualr::Table.new
-    @chart_5.add_column('string', 'Department'      )
-    @chart_5.add_column('number', 'Revenues Change' )
-    @chart_5.add_rows([
+    data_table_5 = GoogleVisualr::DataTable.new
+    data_table_5.new_column('string', 'Department'      )
+    data_table_5.new_column('number', 'Revenues Change' )
+    data_table_5.add_rows([
       ['Shoes'      , 10700 ],
       ['Sports'     , -15400],
       ['Toys'       , 12500 ],
@@ -145,15 +135,13 @@ class DocsController < ApplicationController
       ['Art'        , 1100  ]
     ])
 
-    options = { :width => 600, :allowHtml => true, :showRowNumber => true }
-    options.each_pair do | key, value |
-      @chart_5.send "#{key}=", value
-    end
-
     formatter = GoogleVisualr::NumberFormat.new( { :prefix => '$', :negativeColor => 'red', :negativeParens => true } )
     formatter.columns(1) # Apply to 2nd Column
 
-    @chart_5.format(formatter)
+    data_table_5.format(formatter)
+
+    opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+    @chart_5 = GoogleVisualr::Interactive::Table.new(data_table_5, opts)
 
   end
 
