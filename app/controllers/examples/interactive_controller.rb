@@ -112,7 +112,6 @@ class Examples::InteractiveController < ApplicationController
     data_table.set_cell(2, 0, 'Network')
     data_table.set_cell(2, 1, 68);
 
-
     opts   = { :width => 400, :height => 120, :redFrom => 90, :redTo => 100, :yellowFrom => 75, :yellowTo => 90, :minorTicks => 5 }
     @chart = GoogleVisualr::Interactive::Gauge.new(data_table, opts)
 
@@ -142,7 +141,6 @@ class Examples::InteractiveController < ApplicationController
     @chart = GoogleVisualr::Interactive::GeoChart.new(data_table, opts)
 
   end
-
 
   # http://code.google.com/apis/chart/interactive/docs/gallery/geomap.html#Example
   def geomap
