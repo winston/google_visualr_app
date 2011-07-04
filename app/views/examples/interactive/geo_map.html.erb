@@ -1,4 +1,4 @@
-<h2>GoogleVisualr - Gauge</h2>
+<h2>GoogleVisualr - Geo Map</h2>
 <div class='append-bottom'>
   <hr>
   <h3>Overview</h3>
@@ -26,8 +26,8 @@
     Specify the regions style by assigning <span class='cem'><em>options['dataMode'] = 'regions'</em></span> in your code.
   </p>
   <div id='chart_regions'></div>
-  <%= @chart_regions.render('chart_regions') %>
-  </br>
+  <%= raw @chart_regions.to_js('chart_regions') %>
+  <br/>
   <h4>Markers Example</h4>
   <p>
     The markers style displays a circle, sized and colored to indicate a value, over the areas that you specify.
@@ -36,7 +36,7 @@
     Specify the regions style by assigning <span class='cem'><em>options['dataMode'] = 'markers'</em></span> in your code.
   </p>
   <div id='chart_markers'></div>
-  <%= @chart_markers.render('chart_markers') %>
+  <%= raw @chart_markers.to_js('chart_markers') %>
 </div>
 <div class='append-bottom'>
   <hr>
@@ -45,12 +45,12 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="http://gist.github.com/424765.js?file=example_controller.rb"></script>
+    <script src="https://gist.github.com/1063481.js?file=controller.rb"></script>
   </div>
   <div>
     <p>
       In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/gauge.html#Example" %>, during rendering of the view.
     </p>
-    <script src="http://gist.github.com/424765.js?file=geomap.html.erb"></script>
+    <script src="https://gist.github.com/1063481.js?file=view.html.erb"></script>
   </div>
 </div>

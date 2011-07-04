@@ -165,33 +165,31 @@ class Examples::InteractiveController < ApplicationController
   end
 
   # http://code.google.com/apis/chart/interactive/docs/gallery/geomap.html#Example
-  def geomap
+  def geo_map
 
     # Regions Example
-    data_table_regions = GoogleVisualr::GeoMap.new
+    data_table_regions = GoogleVisualr::DataTable.new
     data_table_regions.new_column('string'  , 'Country'   )
     data_table_regions.new_column('number'  , 'Popularity')
     data_table_regions.add_rows(6)
-    data_table_regions.set_cell(0, 0, 'Germany'      );
-    data_table_regions.set_cell(0, 1, 200);
-    data_table_regions.set_cell(1, 0, 'United States');
-    data_table_regions.set_cell(1, 1, 300);
-    data_table_regions.set_cell(2, 0, 'Brazil'       );
-    data_table_regions.set_cell(2, 1, 400);
-    data_table_regions.set_cell(3, 0, 'Canada'       );
-    data_table_regions.set_cell(3, 1, 500);
-    data_table_regions.set_cell(4, 0, 'France'       );
-    data_table_regions.set_cell(4, 1, 600);
-    data_table_regions.set_cell(5, 0, 'RU'           );
-    data_table_regions.set_cell(5, 1, 700);
+    data_table_regions.set_cell(0, 0, 'Germany'      )
+    data_table_regions.set_cell(0, 1, 200)
+    data_table_regions.set_cell(1, 0, 'United States')
+    data_table_regions.set_cell(1, 1, 300)
+    data_table_regions.set_cell(2, 0, 'Brazil'       )
+    data_table_regions.set_cell(2, 1, 400)
+    data_table_regions.set_cell(3, 0, 'Canada'       )
+    data_table_regions.set_cell(3, 1, 500)
+    data_table_regions.set_cell(4, 0, 'France'       )
+    data_table_regions.set_cell(4, 1, 600)
+    data_table_regions.set_cell(5, 0, 'RU'           )
+    data_table_regions.set_cell(5, 1, 700)
 
-    options = { :dataMode => 'regions' }
-    options.each_pair do | key, value |
-      data_table_regions.send "#{key}=", value
-    end
+    opts   = { :dataMode => 'regions' }
+    @chart_regions = GoogleVisualr::Interactive::GeoMap.new(data_table_regions, opts)
 
     # Markers Example
-    data_table_markers = GoogleVisualr::GeoMap.new
+    data_table_markers = GoogleVisualr::DataTable.new
     data_table_markers.new_column('string'  , 'Country'   )
     data_table_markers.new_column('number'  , 'Popularity')
     data_table_markers.add_rows(6);
@@ -208,10 +206,8 @@ class Examples::InteractiveController < ApplicationController
     data_table_markers.set_cell(5, 0, 'Houston'      );
     data_table_markers.set_cell(5, 1, 700);
 
-    options = { :dataMode => 'markers', :region => 'US', :colors => ['0xFF8747', '0xFFB581', '0xc06000'] }
-    options.each_pair do | key, value |
-      data_table_markers.send "#{key}=", value
-    end
+    opts   = { :dataMode => 'markers', :region => 'US', :colors => ['0xFF8747', '0xFFB581', '0xc06000'] }
+    @chart_markers = GoogleVisualr::Interactive::GeoMap.new(data_table_markers, opts)
 
   end
 
