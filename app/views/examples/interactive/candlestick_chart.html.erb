@@ -1,0 +1,41 @@
+<h2>GoogleVisualr - Candlestick Chart</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    A candlestick chart is used to show an opening and closing value overlaid on top of a total variance and is often used to show stock value behaviour. And in the chart below:
+  </p>
+  <ul>
+    <li>
+      items where the opening value is &lt; the closing value (a gain) are drawn as filled boxes
+    </li>
+    <li>
+      items where the opening value is &gt; the closing value (a loss) are drawn as hollow boxes.
+    </li>
+  </ul>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "http://code.google.com/apis/chart/interactive/docs/gallery/candlestickchart.html" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart'></div>
+  <%= raw @chart.to_js('chart') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
+    </p>
+    <script src="https://gist.github.com/1063446.js?file=controller.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/barchart.html#Example" %>, during rendering of the view.
+    </p>
+    <script src="https://gist.github.com/1063446.js?file=view.html.erb"></script>
+  </div>
+</div>
