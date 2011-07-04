@@ -1,3 +1,7 @@
+= Important
+
+This GoogleVisualr plugin is no longer supported. Please use the newer and better GoogleVisualr gem (master branch) instead.
+
 = Overview
 
 This is the GoogleVisualr reference site, written in Rails.
