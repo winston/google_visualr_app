@@ -120,6 +120,30 @@ class Examples::InteractiveController < ApplicationController
 
   end
 
+  # http://code.google.com/apis/chart/interactive/docs/gallery/combochart.html
+  def combo_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'month'       )
+    data_table.new_column('number', 'Bolivia'     )
+    data_table.new_column('number', 'Ecuador'     )
+    data_table.new_column('number', 'Madagascar'  )
+    data_table.new_column('number', 'Papua Guinea')
+    data_table.new_column('number', 'Rwanda'      )
+    data_table.new_column('number', 'Avarage'     )
+    data_table.add_rows( [
+      ['2004/05', 165, 938  , 522, 998  , 450, 614.6],
+      ['2005/06', 135, 1120 , 599, 1268 , 288, 682  ],
+      ['2006/07', 157, 1167 , 587, 807  , 397, 623  ],
+      ['2007/08', 139, 1110 , 615, 968  , 215, 609.4],
+      ['2008/09', 136, 691  , 629, 1026 , 366, 569.6]
+    ] )
+
+    opts   = { :width => 700, :height => 400, :title => 'Monthly Coffee Production by Country', :vAxis => {:title => 'Cups'}, :hAxis => {:title => 'Month'}, :seriesType => 'bars', :series => {'5' => {:type => 'line'}} }
+    @chart = GoogleVisualr::Interactive::ComboChart.new(data_table, opts)
+
+  end
+
   # http://code.google.com/apis/chart/interactive/docs/gallery/gauge.html#Example
   def gauge
 
@@ -132,7 +156,7 @@ class Examples::InteractiveController < ApplicationController
     data_table.set_cell(1, 0, 'CPU'    )
     data_table.set_cell(1, 1, 55)
     data_table.set_cell(2, 0, 'Network')
-    data_table.set_cell(2, 1, 68);
+    data_table.set_cell(2, 1, 68)
 
     opts   = { :width => 400, :height => 120, :redFrom => 90, :redTo => 100, :yellowFrom => 75, :yellowTo => 90, :minorTicks => 5 }
     @chart = GoogleVisualr::Interactive::Gauge.new(data_table, opts)
@@ -192,19 +216,19 @@ class Examples::InteractiveController < ApplicationController
     data_table_markers = GoogleVisualr::DataTable.new
     data_table_markers.new_column('string'  , 'Country'   )
     data_table_markers.new_column('number'  , 'Popularity')
-    data_table_markers.add_rows(6);
-    data_table_markers.set_cell(0, 0, 'New York'     );
-    data_table_markers.set_cell(0, 1, 200);
-    data_table_markers.set_cell(1, 0, 'Boston'       );
-    data_table_markers.set_cell(1, 1, 300);
-    data_table_markers.set_cell(2, 0, 'Miami'        );
-    data_table_markers.set_cell(2, 1, 400);
-    data_table_markers.set_cell(3, 0, 'Chicago'      );
-    data_table_markers.set_cell(3, 1, 500);
-    data_table_markers.set_cell(4, 0, 'Los Angeles'  );
-    data_table_markers.set_cell(4, 1, 600);
-    data_table_markers.set_cell(5, 0, 'Houston'      );
-    data_table_markers.set_cell(5, 1, 700);
+    data_table_markers.add_rows(6)
+    data_table_markers.set_cell(0, 0, 'New York'     )
+    data_table_markers.set_cell(0, 1, 200)
+    data_table_markers.set_cell(1, 0, 'Boston'       )
+    data_table_markers.set_cell(1, 1, 300)
+    data_table_markers.set_cell(2, 0, 'Miami'        )
+    data_table_markers.set_cell(2, 1, 400)
+    data_table_markers.set_cell(3, 0, 'Chicago'      )
+    data_table_markers.set_cell(3, 1, 500)
+    data_table_markers.set_cell(4, 0, 'Los Angeles'  )
+    data_table_markers.set_cell(4, 1, 600)
+    data_table_markers.set_cell(5, 0, 'Houston'      )
+    data_table_markers.set_cell(5, 1, 700)
 
     opts   = { :dataMode => 'markers', :region => 'US', :colors => ['0xFF8747', '0xFFB581', '0xc06000'] }
     @chart_markers = GoogleVisualr::Interactive::GeoMap.new(data_table_markers, opts)
