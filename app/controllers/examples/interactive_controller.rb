@@ -436,4 +436,48 @@ class Examples::InteractiveController < ApplicationController
 
   end
 
+  # http://code.google.com/apis/chart/interactive/docs/gallery/treemap.html#Example
+  def tree_map
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Region')
+    data_table.new_column('string', 'Parent')
+    data_table.new_column('number', 'Market trade volume (size)')
+    data_table.new_column('number', 'Market increase/decrease (color)')
+    data_table.add_rows( [
+      ["Global"   , nil      , 0 , 0   ],
+      ["America"  , "Global"  , 0 , 0   ],
+      ["Europe"   , "Global"  , 0 , 0   ],
+      ["Asia"     , "Global"  , 0 , 0   ],
+      ["Australia", "Global"  , 0 , 0   ],
+      ["Africa"   , "Global"  , 0 , 0   ],
+      ["Brazil"   , "America" , 11, 10  ],
+      ["USA"      , "America" , 52, 31  ],
+      ["Mexico"   , "America" , 24, 12  ],
+      ["Canada"   , "America" , 16, -23 ],
+      ["France"   , "Europe"  , 42, -11 ],
+      ["Germany"  , "Europe"  , 31, -2  ],
+      ["Sweden"   , "Europe"  , 22, -13 ],
+      ["Italy"    , "Europe"  , 17, 4   ],
+      ["UK"       , "Europe"  , 21, -5  ],
+      ["China"    , "Asia"    , 36, 4   ],
+      ["Japan"    , "Asia"    , 20, -12 ],
+      ["India"    , "Asia"    , 40, 63  ],
+      ["Laos"     , "Asia"    , 4 , 34  ],
+      ["Mongolia" , "Asia"    , 1 , -5  ],
+      ["Israel"   , "Asia"    , 12, 24  ],
+      ["Iran"     , "Asia"    , 18, 13  ],
+      ["Pakistan" , "Asia"    , 11, -52 ],
+      ["Egypt"    , "Africa"  , 21, 0   ],
+      ["S. Africa", "Africa"  , 30, 43  ],
+      ["Sudan"    , "Africa"  , 12, 2   ],
+      ["Congo"    , "Africa"  , 10, 12  ],
+      ["Zair"     , "Africa"  , 8 , 10  ]
+    ] )
+
+    opts   = { :width => 600, :height => 600, :minColor => '#f00', :midColor => '#ddd', :maxColor => '#0d0', :headerHeight => 15, :fontColor => 'black', :showScale => true }
+    @chart = GoogleVisualr::Interactive::TreeMap.new(data_table, opts)
+
+  end
+
 end

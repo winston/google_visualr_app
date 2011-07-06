@@ -1,0 +1,34 @@
+<h2>GoogleVisualr - Tree Map</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    A visual representation of a data tree, where each node can have zero or more children, and one parent (except for the root, which has no parents).
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "http://code.google.com/apis/chart/interactive/docs/gallery/treemap.html" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <!-- Specify the size of the Container element explicitly! -->
+  <div id='chart' style="width: 600px; height: 600px;"></div>
+  <%= raw @chart.to_js('chart') %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
+    </p>
+    <script src="https://gist.github.com/1067675.js?file=controller.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/treemap.html#Example" %>, during rendering of the view.
+    </p>
+    <script src="https://gist.github.com/1067675.js?file=view.html.erb"></script>
+  </div>
+</div>
