@@ -50,6 +50,9 @@ GoogleVisualrApp::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => "application#index"
 
+  match "docs"            => "docs#index"     , :as => :docs_index
+  match "docs/formatters" => "docs#formatters", :as => :docs_formatters
+
   namespace "examples" do
     match "interactive(/:action)" => "interactive"
     match "image(/:action)"       => "image"
