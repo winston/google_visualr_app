@@ -1,4 +1,4 @@
-<h2>GoogleVisualr - Gauge</h2>
+<h2>GoogleVisualr - Geo Chart</h2>
 <div class='append-bottom'>
   <hr>
   <h3>Overview</h3>
@@ -16,7 +16,7 @@
   <hr>
   <h3>Example</h3>
   <div id='chart'></div>
-  <%= raw @chart.to_js('chart') %>
+  <%= render_chart @chart, 'chart' %>
 </div>
 <div class='append-bottom'>
   <hr>

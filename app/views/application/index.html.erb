@@ -48,7 +48,7 @@
   </p>
   <p>
     <code>
-      gem "google_visualr", "~> 2.0.3"
+      gem "google_visualr", "~> 2.1.0"
     </code>
   </p>
 </div>
@@ -115,7 +115,7 @@
   <p>
     <code>
       &lt;div id='chart'&gt;&lt;/div&gt;<br/>
-      &lt;%= raw @chart.to_js('chart') %&gt;
+      &lt;%= render_chart(@chart, 'chart') %&gt;
     </code>
   </p>
 </div>
@@ -148,6 +148,22 @@
   <p>
     I welcome all pull requests for new or improved examples, and even language fixes. Thanks in advance!
   </p>
+</div>
+
+<!--
+  Change Log
+-->
+<div id='changelog' class='append-bottom'>
+  <hr/>
+  <h2>Change Log</h2>
+  <em>
+    Version 2.1.0
+  </em>
+  <ul>
+    <li>
+      Added <em>#render_chart</em> as a helper method in Rails views.
+    </li>
+  </ul>
 </div>
 
 <!--

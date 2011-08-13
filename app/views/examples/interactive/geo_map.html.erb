@@ -26,7 +26,7 @@
     Specify the regions style by assigning <span class='cem'><em>options['dataMode'] = 'regions'</em></span> in your code.
   </p>
   <div id='chart_regions'></div>
-  <%= raw @chart_regions.to_js('chart_regions') %>
+  <%= render_chart @chart_regions, 'chart_regions' %>
   <br/>
   <h4>Markers Example</h4>
   <p>
@@ -36,7 +36,7 @@
     Specify the regions style by assigning <span class='cem'><em>options['dataMode'] = 'markers'</em></span> in your code.
   </p>
   <div id='chart_markers'></div>
-  <%= raw @chart_markers.to_js('chart_markers') %>
+  <%= render_chart @chart_markers, 'chart_markers' %>
 </div>
 <div class='append-bottom'>
   <hr>
