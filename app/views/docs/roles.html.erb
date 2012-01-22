@@ -1,0 +1,33 @@
+<h2>GoogleVisualr - Roles (Experimental)</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    GoogleVisualr::DataTable now supports <em>role</em> and <em>pattern</em> attributes in <em>#new_column</em> and <em>#new_columns</em> methods.
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "http://code.google.com/apis/chart/interactive/docs/roles.html" %> for details.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart'></div>
+  <%= render_chart @chart, 'chart' %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create the data_table object, set new columns (with role), add row values, then instantiate the chart with configuration options.
+    </p>
+    <script src="https://gist.github.com/1656350.js?file=controller.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>to_js</em> method to generate <%= link_to "JavasScript", "http://code.google.com/apis/chart/interactive/docs/roles.html#whatareroles" %>, during rendering of the view.
+    </p>
+    <script src="https://gist.github.com/1656350.js?file=view.html.erb"></script>
+  </div>
+</div>

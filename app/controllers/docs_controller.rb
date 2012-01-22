@@ -145,4 +145,29 @@ class DocsController < ApplicationController
 
   end
 
+  # http://code.google.com/apis/chart/interactive/docs/roles.html
+  def roles
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Month')
+    data_table.new_column('number', 'Sales')
+    # Columns with role definition
+    data_table.new_column('number'  , nil, nil, 'interval')
+    data_table.new_column('number'  , nil, nil, 'interval')
+    data_table.new_column('string'  , nil, nil, 'annotation')
+    data_table.new_column('string'  , nil, nil, 'annotationText')
+    data_table.new_column('boolean' , nil, nil, 'certainty')
+
+    data_table.add_rows([
+      ['April', 1000, 900 , 1100, 'A', 'Stolen data'  , true],
+      ['May'  , 1170, 1000, 1200, 'B', 'Coffee spill' , true],
+      ['June' , 660 , 550 , 800 , 'C', 'Wampus attack', true],
+      ['July' , 1030, nil , nil , nil, nil            , false]
+    ])
+
+    opts   = { :width => 600, :height => 400, :title => 'Sales', :legend => 'none' }
+    @chart = GoogleVisualr::Interactive::LineChart.new(data_table, opts)
+
+  end
+
 end

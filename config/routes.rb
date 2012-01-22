@@ -52,6 +52,7 @@ GoogleVisualrApp::Application.routes.draw do
 
   match "docs"            => "docs#index"     , :as => :docs_index
   match "docs/formatters" => "docs#formatters", :as => :docs_formatters
+  match "docs/roles"      => "docs#roles"     , :as => :docs_roles
 
   namespace "examples" do
     match "interactive(/:action)" => "interactive"
