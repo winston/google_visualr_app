@@ -1,14 +1,12 @@
 <html>
   <head>
-
     <title><%= meta_title %></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
     <script src="http://www.google.com/jsapi"></script>
     <%= stylesheet_link_tag "blueprint/screen", :media => "screen, projection"%>
     <%= stylesheet_link_tag "application"     , :media => "screen, projection"%>
-
   </head>
+
   <body>
     <div class='container prepend-top append-bottom'>
       <div class='span-24 last'>
@@ -43,6 +41,7 @@
                   <li><%= link_to 'Annotated Time Line' , :controller => 'examples/interactive', :action => 'annotated_time_line' %></li>
                   <li><%= link_to 'Area Chart'          , :controller => 'examples/interactive', :action => 'area_chart'          %></li>
                   <li><%= link_to 'Bar Chart'           , :controller => 'examples/interactive', :action => 'bar_chart'           %></li>
+                  <li><%= link_to 'Bubble Chart'        , :controller => 'examples/interactive', :action => 'bubble_chart'        %></li>
                   <li><%= link_to 'Candlestick Chart'   , :controller => 'examples/interactive', :action => 'candlestick_chart'   %></li>
                   <li><%= link_to 'Column Chart'        , :controller => 'examples/interactive', :action => 'column_chart'        %></li>
                   <li><%= link_to 'Combo Chart'         , :controller => 'examples/interactive', :action => 'combo_chart'         %></li>
@@ -56,6 +55,7 @@
                   <li><%= link_to 'Organizational Chart', :controller => 'examples/interactive', :action => 'org_chart'           %></li>
                   <li><%= link_to 'Pie Chart'           , :controller => 'examples/interactive', :action => 'pie_chart'           %></li>
                   <li><%= link_to 'Scatter Chart'       , :controller => 'examples/interactive', :action => 'scatter_chart'       %></li>
+                  <li><%= link_to 'Stepped Area Chart'  , :controller => 'examples/interactive', :action => 'stepped_area_chart'  %></li>
                   <li><%= link_to 'Table'               , :controller => 'examples/interactive', :action => 'table'               %></li>
                   <li><%= link_to 'Tree Map'            , :controller => 'examples/interactive', :action => 'tree_map'            %></li>
                 </ul>

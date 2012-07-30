@@ -1,0 +1,33 @@
+<h2>GoogleVisualr - Bubble Chart</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    A bubble chart is used to visualize a data set with 2-4 dimensions. The first two are visualized as coordinates, the 3rd as color and the 4th as size.
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "http://code.google.com/apis/chart/interactive/docs/gallery/bubblechart.html" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart'></div>
+  <%= render_chart @chart, 'chart' %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
+    </p>
+    <script src="https://gist.github.com/3208140.js?file=controller.rb"></script>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/table.html#Example" %>, during rendering of the view.
+    </p>
+    <script src="https://gist.github.com/3208140.js?file=view.html.erb"></script>
+  </div>
+</div>

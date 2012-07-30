@@ -72,6 +72,39 @@ class Examples::InteractiveController < ApplicationController
 
   end
 
+  # http://code.google.com/apis/chart/interactive/docs/gallery/bubblechart.html
+def bubble_chart
+
+  data_table = GoogleVisualr::DataTable.new
+  data_table.new_column('string', 'ID')
+  data_table.new_column('number', 'Life Expectancy')
+  data_table.new_column('number', 'Fertility Rate')
+  data_table.new_column('string', 'Region')
+  data_table.new_column('number', 'Population')
+  data_table.add_rows( [
+    ['CAN',    80.66,              1.67,      'North America',  33739900],
+    ['DEU',    79.84,              1.36,      'Europe',         81902307],
+    ['DNK',    78.6,               1.84,      'Europe',         5523095],
+    ['EGY',    72.73,              2.78,      'Middle East',    79716203],
+    ['GBR',    80.05,              2,         'Europe',         61801570],
+    ['IRN',    72.49,              1.7,       'Middle East',    73137148],
+    ['IRQ',    68.09,              4.77,      'Middle East',    31090763],
+    ['ISR',    81.55,              2.96,      'Middle East',    7485600],
+    ['RUS',    68.6,               1.54,      'Europe',         141850000],
+    ['USA',    78.09,              2.05,      'North America',  307007000]
+  ])
+
+  opts    = {
+     :width => 800, :height => 500,
+     :title => 'Correlation between life expectancy, fertility rate and population of some world countries (2010)',
+     :hAxis => { :title => 'Life Expectancy' },
+     :vAxis => { :title => 'Fertility Rate'  },
+     :bubble => { :textStyle => { :fontSize => 11 } }
+   }
+   @chart = GoogleVisualr::Interactive::BubbleChart.new(data_table, opts)
+
+end
+
   # http://code.google.com/apis/chart/interactive/docs/gallery/candlestickchart.html
   def candlestick_chart
 
@@ -115,7 +148,7 @@ class Examples::InteractiveController < ApplicationController
     data_table.set_cell(3, 1, 1030)
     data_table.set_cell(3, 2, 540)
 
-    opts   = { :width => 400, :height => 240, :title => 'Company Performance', :hAxis => { :title => 'Year', :titleTextStyle => {:color => 'red'}} }
+    opts   = { :width => 400, :height => 240, :title => 'Company Performance', :hAxis => { :title => 'Year', :titleTextStyle => {:color => 'red'} } }
     @chart = GoogleVisualr::Interactive::ColumnChart.new(data_table, opts)
 
   end
@@ -407,6 +440,25 @@ class Examples::InteractiveController < ApplicationController
                :vAxis => { :title => 'Weight' , :minValue => 0, :maxValue => 15 },
                :legend => 'none' }
     @chart = GoogleVisualr::Interactive::ScatterChart.new(data_table, opts)
+
+  end
+
+  # http://code.google.com/apis/chart/interactive/docs/gallery/steppedareachart.html#Example
+  def stepped_area_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string'  , 'Director (Year)')
+    data_table.new_column('number'  , 'Rotten Tomatoes')
+    data_table.new_column('number' , 'IMDB')
+    data_table.add_rows( [
+      ['Alfred Hitchcock (1935)', 8.4,         7.9],
+      ['Ralph Thomas (1959)',     6.9,         6.5],
+      ['Don Sharp (1978)',        6.5,         6.4],
+      ['James Hawes (2008)',      4.4,         6.2]
+    ])
+
+    opts   = { :width => 800, :height => 500, :title => "The decline of 'The 39 Steps'", :vAxis => { :title => 'Accumulated Rating'}, :isStacked => true }
+    @chart = GoogleVisualr::Interactive::SteppedAreaChart.new(data_table, opts)
 
   end
 
