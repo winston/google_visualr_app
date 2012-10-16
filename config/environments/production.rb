@@ -55,4 +55,7 @@ GoogleVisualrApp::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+
+  # Don't connect to DB
+  config.assets.initialize_on_precompile = false
 end
