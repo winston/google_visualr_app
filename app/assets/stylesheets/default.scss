@@ -1,0 +1,57 @@
+body {
+  @include blueprint-typography(true);
+}
+
+#container {
+  @include container;
+}
+
+#header {
+  @include column(24, last);
+}
+
+#side_navigation {
+  margin-top: 2.5em;
+  @include column(4);
+
+  ul {
+    margin: 0; padding: 0;
+    list-style-type: none;
+
+    li {
+      margin: 0 0 5px 0;
+    }
+  }
+
+  ul li ul{
+    margin: 5px 0 0 10px;
+
+    li {
+      margin: 0 0 5px 0;
+    }
+  }
+}
+
+#content {
+  @include column(20, last);
+}
+
+hr {
+  width: 100%;
+  height: 0.1em;
+  margin:0 0 1.45em;
+  background: #ddd;
+  color: #ddd;
+  border: none;
+}
+
+code {
+  display: block;
+  padding: 10px;
+  background-color: #EEE;
+  border: 1px solid #CCC;
+}
+
+.sub     { padding: .3em; margin: 2em 0 1em 0; background: #E5ECF9;  border-top: 1px solid #3366CC; }
+
+span.cem { color: green; }
