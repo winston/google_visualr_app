@@ -43,7 +43,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fssm (0.2.9)
-    google_visualr (2.1.4)
+    google_visualr (2.1.6)
     heroku (2.32.13)
       heroku-api (~> 0.3.5)
       launchy (>= 0.3.2)
@@ -119,7 +119,7 @@ PLATFORMS
 
 DEPENDENCIES
   compass-rails (~> 1.0.3)
-  google_visualr (~> 2.1.4)
+  google_visualr (~> 2.1.6)
   heroku
   rails (= 3.2.11)
   sass-rails (~> 3.2.5)
