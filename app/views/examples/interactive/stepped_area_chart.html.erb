@@ -22,12 +22,34 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="https://gist.github.com/3207978.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  # http://code.google.com/apis/chart/interactive/docs/gallery/steppedareachart.html#Example
+  def stepped_area_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string'  , 'Director (Year)')
+    data_table.new_column('number'  , 'Rotten Tomatoes')
+    data_table.new_column('number' , 'IMDB')
+    data_table.add_rows( [
+      ['Alfred Hitchcock (1935)', 8.4,         7.9],
+      ['Ralph Thomas (1959)',     6.9,         6.5],
+      ['Don Sharp (1978)',        6.5,         6.4],
+      ['James Hawes (2008)',      4.4,         6.2]
+    ])
+
+    opts   = { :width => 800, :height => 500, :title => "The decline of 'The 39 Steps'", :vAxis => { :title => 'Accumulated Rating'}, :isStacked => true }
+    @chart = GoogleVisualr::Interactive::SteppedAreaChart.new(data_table, opts)
+
+  end
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/table.html#Example" %>, during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/table.html#Example" %>, during rendering of the view.
     </p>
-    <script src="https://gist.github.com/3207978.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </div>
 </div>

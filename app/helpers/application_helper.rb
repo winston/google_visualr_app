@@ -12,4 +12,12 @@ module ApplicationHelper
     "#{cname}GoogleVisualr".gsub("Index ::", "")
   end
 
+  def codify_ruby(&block)
+    CodeRay.scan(capture(&block), :ruby).div.html_safe
+  end
+
+  def codify_html(&block)
+    CodeRay.scan(capture(&block), :erb).div.html_safe
+  end
+
 end

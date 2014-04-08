@@ -22,12 +22,38 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="https://gist.github.com/1057962.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  # http://code.google.com/apis/chart/interactive/docs/gallery/motionchart.html#Example
+  def motion_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Fruit'   )
+    data_table.new_column('date'  , 'Date'    )
+    data_table.new_column('number', 'Sales'   )
+    data_table.new_column('number', 'Expenses')
+    data_table.new_column('string', 'Location')
+    data_table.add_rows([
+      ['Apples' ,Date.parse("1988-01-01"),1000,300,'East'],
+      ['Oranges',Date.parse("1988-01-01"),1150,200,'West'],
+      ['Bananas',Date.parse("1988-01-01"),300 ,250,'West'],
+      ['Apples' ,Date.parse("1989-07-01"),1200,400,'East'],
+      ['Oranges',Date.parse("1989-07-01"),750 ,150,'West'],
+      ['Bananas',Date.parse("1989-07-01"),788 ,617,'West']
+    ])
+
+    opts   = { :width => 600, :height => 300 }
+    @chart = GoogleVisualr::Interactive::MotionChart.new(data_table, opts)
+
+  end
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/motionchart.html#Example" %>, during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/motionchart.html#Example" %>, during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057962.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </div>
 </div>

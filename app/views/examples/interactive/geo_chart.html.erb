@@ -25,12 +25,40 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="https://gist.github.com/1057951.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  # http://code.google.com/apis/chart/interactive/docs/gallery/geochart.html#Example
+  def geo_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Country')
+    data_table.new_column('number', 'Popularity')
+    data_table.add_rows(6)
+    data_table.set_cell(0, 0, 'Germany')
+    data_table.set_cell(0, 1, 200)
+    data_table.set_cell(1, 0, 'United States')
+    data_table.set_cell(1, 1, 300)
+    data_table.set_cell(2, 0, 'Brazil')
+    data_table.set_cell(2, 1, 400)
+    data_table.set_cell(3, 0, 'Canada')
+    data_table.set_cell(3, 1, 500)
+    data_table.set_cell(4, 0, 'France')
+    data_table.set_cell(4, 1, 600)
+    data_table.set_cell(5, 0, 'RU')
+    data_table.set_cell(5, 1, 700)
+
+    opts   = { :width => 500, :height => 300 }
+    @chart = GoogleVisualr::Interactive::GeoChart.new(data_table, opts)
+
+  end
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/geochart.html#Example" %>, during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/geochart.html#Example" %>, during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057951.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </div>
 </div>

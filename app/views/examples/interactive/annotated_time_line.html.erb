@@ -26,12 +26,41 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="https://gist.github.com/1057942.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  # http://code.google.com/apis/chart/interactive/docs/gallery/annotatedtimeline.html#Example
+  def annotated_time_line
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('date'  , 'Date')
+    data_table.new_column('number', 'Sold Pencils')
+    data_table.new_column('string', 'title1')
+    data_table.new_column('string', 'text1' )
+    data_table.new_column('number', 'Sold Pens'   )
+    data_table.new_column('string', 'title2')
+    data_table.new_column('string', 'text2' )
+    data_table.add_rows( [
+      [ Date.parse("2008-2-1"), 30000, '', '', 40645, '', ''],
+      [ Date.parse("2008-2-2"), 14045, '', '', 20374, '', ''],
+      [ Date.parse("2008-2-3"), 55022, '', '', 50766, '', ''],
+      [ Date.parse("2008-2-4"), 75284, '', '', 14334, 'Out of Stock','Ran out of stock on pens at 4pm'],
+      [ Date.parse("2008-2-5"), 41476, 'Bought Pens','Bought 200k pens', 66467, '', ''],
+      [ Date.parse("2008-2-6"), 33322, '', '', 39463, '', '']
+    ] )
+
+    opts   = { :displayAnnotations => true }
+    @chart = GoogleVisualr::Interactive::AnnotatedTimeLine.new(data_table, opts)
+
+  end
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate <%= link_to "JavasScript", "http://code.google.com/apis/chart/interactive/docs/gallery/annotatedtimeline.html#Example" %>, during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavasScript", "http://code.google.com/apis/chart/interactive/docs/gallery/annotatedtimeline.html#Example" %>, during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057942.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <!-- Specify the size of the Container element explicitly! -->
+  <div id='chart' style='width: 700px; height: 240px;'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </div>
 </div>

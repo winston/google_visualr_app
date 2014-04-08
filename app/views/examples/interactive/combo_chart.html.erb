@@ -25,12 +25,39 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="https://gist.github.com/1065169.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  # http://code.google.com/apis/chart/interactive/docs/gallery/combochart.html
+  def combo_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'month'       )
+    data_table.new_column('number', 'Bolivia'     )
+    data_table.new_column('number', 'Ecuador'     )
+    data_table.new_column('number', 'Madagascar'  )
+    data_table.new_column('number', 'Papua Guinea')
+    data_table.new_column('number', 'Rwanda'      )
+    data_table.new_column('number', 'Avarage'     )
+    data_table.add_rows( [
+      ['2004/05', 165, 938  , 522, 998  , 450, 614.6],
+      ['2005/06', 135, 1120 , 599, 1268 , 288, 682  ],
+      ['2006/07', 157, 1167 , 587, 807  , 397, 623  ],
+      ['2007/08', 139, 1110 , 615, 968  , 215, 609.4],
+      ['2008/09', 136, 691  , 629, 1026 , 366, 569.6]
+    ] )
+
+    opts   = { :width => 700, :height => 400, :title => 'Monthly Coffee Production by Country', :vAxis => {:title => 'Cups'}, :hAxis => {:title => 'Month'}, :seriesType => 'bars', :series => {'5' => {:type => 'line'}} }
+    @chart = GoogleVisualr::Interactive::ComboChart.new(data_table, opts)
+
+  end
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/combochart.html#Example" %>, during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/combochart.html#Example" %>, during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1065169.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </div>
 </div>

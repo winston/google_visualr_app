@@ -22,12 +22,38 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="https://gist.github.com/1057968.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  # http://code.google.com/apis/chart/interactive/docs/gallery/piechart.html#Example
+  def pie_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Task')
+    data_table.new_column('number', 'Hours per Day')
+    data_table.add_rows(5)
+    data_table.set_cell(0, 0, 'Work'     )
+    data_table.set_cell(0, 1, 11 )
+    data_table.set_cell(1, 0, 'Eat'      )
+    data_table.set_cell(1, 1, 2  )
+    data_table.set_cell(2, 0, 'Commute'  )
+    data_table.set_cell(2, 1, 2  )
+    data_table.set_cell(3, 0, 'Watch TV' )
+    data_table.set_cell(3, 1, 2  )
+    data_table.set_cell(4, 0, 'Sleep'    )
+    data_table.set_cell(4, 1, 7  )
+
+    opts   = { :width => 400, :height => 240, :title => 'My Daily Activities', :is3D => true }
+    @chart = GoogleVisualr::Interactive::PieChart.new(data_table, opts)
+
+  end
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/piechart.html#Example" %>, during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/piechart.html#Example" %>, during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057968.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </div>
 </div>

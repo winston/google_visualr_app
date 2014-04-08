@@ -22,12 +22,45 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="https://gist.github.com/1057970.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  # http://code.google.com/apis/chart/interactive/docs/gallery/scatterchart.html#Example
+  def scatter_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('number', 'Age')
+    data_table.new_column('number', 'Weight')
+    data_table.add_rows(6)
+    data_table.set_cell( 0, 0, 8  )
+    data_table.set_cell( 0, 1, 12 )
+    data_table.set_cell( 1, 0, 4  )
+    data_table.set_cell( 1, 1, 5.5)
+    data_table.set_cell( 2, 0, 11 )
+    data_table.set_cell( 2, 1, 14 )
+    data_table.set_cell( 3, 0, 4  )
+    data_table.set_cell( 3, 1, 4.5)
+    data_table.set_cell( 4, 0, 3  )
+    data_table.set_cell( 4, 1, 3.5)
+    data_table.set_cell( 5, 0, 6.5)
+    data_table.set_cell( 5, 1, 7  )
+
+    opts   = {
+      :width => 400, :height => 240, :title => 'Age vs. Weight comparison',
+      :hAxis => { :title => 'Age'    , :minValue => 0, :maxValue => 15 },
+      :vAxis => { :title => 'Weight' , :minValue => 0, :maxValue => 15 },
+      :legend => 'none'
+    }
+    @chart = GoogleVisualr::Interactive::ScatterChart.new(data_table, opts)
+
+  end
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/scatterchart.html#Example" %>, during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/scatterchart.html#Example" %>, during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057970.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </div>
 </div>

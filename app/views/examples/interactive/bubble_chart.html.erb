@@ -22,12 +22,48 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="https://gist.github.com/3208140.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  # http://code.google.com/apis/chart/interactive/docs/gallery/bubblechart.html
+  def bubble_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'ID')
+    data_table.new_column('number', 'Life Expectancy')
+    data_table.new_column('number', 'Fertility Rate')
+    data_table.new_column('string', 'Region')
+    data_table.new_column('number', 'Population')
+    data_table.add_rows( [
+      ['CAN',    80.66,              1.67,      'North America',  33739900],
+      ['DEU',    79.84,              1.36,      'Europe',         81902307],
+      ['DNK',    78.6,               1.84,      'Europe',         5523095],
+      ['EGY',    72.73,              2.78,      'Middle East',    79716203],
+      ['GBR',    80.05,              2,         'Europe',         61801570],
+      ['IRN',    72.49,              1.7,       'Middle East',    73137148],
+      ['IRQ',    68.09,              4.77,      'Middle East',    31090763],
+      ['ISR',    81.55,              2.96,      'Middle East',    7485600],
+      ['RUS',    68.6,               1.54,      'Europe',         141850000],
+      ['USA',    78.09,              2.05,      'North America',  307007000]
+    ])
+
+    opts    = {
+      :width => 800, :height => 500,
+      :title => 'Correlation between life expectancy, fertility rate and population of some world countries (2010)',
+      :hAxis => { :title => 'Life Expectancy' },
+      :vAxis => { :title => 'Fertility Rate'  },
+      :bubble => { :textStyle => { :fontSize => 11 } }
+    }
+    @chart = GoogleVisualr::Interactive::BubbleChart.new(data_table, opts)
+
+  end
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/table.html#Example" %>, during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/table.html#Example" %>, during rendering of the view.
     </p>
-    <script src="https://gist.github.com/3208140.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </div>
 </div>

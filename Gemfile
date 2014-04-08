@@ -5,6 +5,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.16'
 
 gem 'google_visualr', '~> 2.2.0'
+gem 'coderay'
 
 group :assets do
   gem 'compass-rails' , '~> 1.0.3'

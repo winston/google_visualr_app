@@ -72,13 +72,35 @@
     <p>
       In your controller, create your data_table object, then create your formatter and apply it to specific column/s.
     </p>
-    <script src="https://gist.github.com/1057977.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  data_table_1 = GoogleVisualr::DataTable.new
+  data_table_1.new_column('string', 'Department'      )
+  data_table_1.new_column('number', 'Revenues Change' )
+  data_table_1.add_rows([
+    ['Shoes'      , { :v => 12   , :f => '12.0%' }],
+    ['Sports'     , { :v => -7.3 , :f => '-7.3%' }],
+    ['Toys'       , { :v => 0    , :f => '0%'    }],
+    ['Electronics', { :v => -2.1 , :f => '-2.1%' }],
+    ['Food'       , { :v => 22   , :f => '22.0%' }]
+  ])
+
+  formatter = GoogleVisualr::ArrowFormat.new
+  formatter.columns(1) # Apply to 2nd Column
+
+  data_table_1.format(formatter)
+
+  opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+  @chart_1 = GoogleVisualr::Interactive::Table.new(data_table_1, opts)
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate JavaScript during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate JavaScript during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057977.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart_1'></div>
+  <%%= render_chart @chart_1, 'chart_1' %>
+    <% end %>
   </div>
 </div>
 
@@ -101,13 +123,36 @@
     <p>
       In your controller, create your data_table object, then create your formatter and apply it to specific column/s.
     </p>
-    <script src="https://gist.github.com/1057978.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  data_table_2 = GoogleVisualr::DataTable.new
+  data_table_2.new_column('string', 'Department'      )
+  data_table_2.new_column('number', 'Revenues Change' )
+  data_table_2.add_rows([
+    ['Shoes'      , 10700 ],
+    ['Sports'     , -15400],
+    ['Toys'       , 12500 ],
+    ['Electronics', -2100 ],
+    ['Food'       , 22600 ],
+    ['Art'        , 1100  ]
+  ])
+
+  formatter = GoogleVisualr::BarFormat.new( { :width => 150 } )
+  formatter.columns(1) # Apply to 2nd Column
+
+  data_table_2.format(formatter)
+
+  opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+  @chart_2 = GoogleVisualr::Interactive::Table.new(data_table_2, opts)
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate JavaScript during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate JavaScript during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057978.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart_2'></div>
+  <%%= render_chart @chart_2, 'chart_2' %>
+    <% end %>
   </div>
 </div>
 
@@ -133,13 +178,38 @@
     <p>
       In your controller, create your data_table object, then create your formatter and apply it to specific column/s.
     </p>
-    <script src="https://gist.github.com/1057980.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  data_table_3 = GoogleVisualr::DataTable.new
+  data_table_3.new_column('string', 'Department'      )
+  data_table_3.new_column('number', 'Revenues Change' )
+  data_table_3.add_rows([
+    ['Shoes'      , 10700 ],
+    ['Sports'     , -15400],
+    ['Toys'       , 12500 ],
+    ['Electronics', -2100 ],
+    ['Food'       , 22600 ],
+    ['Art'        , 1100  ]
+  ])
+
+  formatter = GoogleVisualr::ColorFormat.new
+  formatter.add_range( -20000, 0   , 'white' , 'orange'  )
+  formatter.add_range( 20000 , nil , 'red'   , '#33ff33' )
+  formatter.columns(1) # Apply to 2nd Column
+
+  data_table_3.format(formatter)
+
+  opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+  @chart_3 = GoogleVisualr::Interactive::Table.new(data_table_3, opts)
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate JavaScript during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate JavaScript during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057980.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart_3'></div>
+  <%%= render_chart @chart_3, 'chart_3' %>
+    <% end %>
   </div>
 </div>
 
@@ -162,13 +232,42 @@
     <p>
       In your controller, create your data_table object, then create your formatter and apply it to specific column/s.
     </p>
-    <script src="https://gist.github.com/1057984.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  data_table_4 = GoogleVisualr::DataTable.new
+  data_table_4.new_column('string', 'Employee Name')
+  data_table_4.new_column('date', 'Start Date (L)' )
+  data_table_4.new_column('date', 'Start Date (M)' )
+  data_table_4.new_column('date', 'Start Date (S)' )
+  data_table_4.add_rows([
+    ['Mike' , Date.parse('2008-02-28 00:31:26'), Date.parse('2008-02-28 00:31:26'), Date.parse('2008-02-28 00:31:26') ],
+    ['Bob'  , Date.parse('2007-06-01 00:00:00'), Date.parse('2007-06-01 00:00:00'), Date.parse('2007-06-01 00:00:00') ],
+    ['Alice', Date.parse('2006-08-16'), Date.parse('2006-08-16'), Date.parse('2006-08-16') ],
+  ])
+
+  # Create 3 x Formatters
+  formatter_L = GoogleVisualr::DateFormat.new( { :formatType => 'long'   } )
+  formatter_M = GoogleVisualr::DateFormat.new( { :formatType => 'medium' } )
+  formatter_S = GoogleVisualr::DateFormat.new( { :formatType => 'short'  } )
+
+  # Format Columns
+  formatter_L.columns(1) # Apply to 2nd Column
+  formatter_M.columns(2) # Apply to 3rd Column
+  formatter_S.columns(3) # Apply to 4th Column
+
+  data_table_4.format( formatter_L, formatter_M, formatter_S )
+
+  opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+  @chart_4 = GoogleVisualr::Interactive::Table.new(data_table_4, opts)
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate JavaScript during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate JavaScript during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057984.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart_4'></div>
+  <%%= render_chart @chart_4, 'chart_4' %>
+    <% end %>
   </div>
 </div>
 
@@ -191,12 +290,35 @@
     <p>
       In your controller, create your data_table object, then create your formatter and apply it to specific column/s.
     </p>
-    <script src="https://gist.github.com/1057985.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  data_table_5 = GoogleVisualr::DataTable.new
+  data_table_5.new_column('string', 'Department'      )
+  data_table_5.new_column('number', 'Revenues Change' )
+  data_table_5.add_rows([
+    ['Shoes'      , 10700 ],
+    ['Sports'     , -15400],
+    ['Toys'       , 12500 ],
+    ['Electronics', -2100 ],
+    ['Food'       , 22600 ],
+    ['Art'        , 1100  ]
+  ])
+
+  formatter = GoogleVisualr::NumberFormat.new( { :prefix => '$', :negativeColor => 'red', :negativeParens => true } )
+  formatter.columns(1) # Apply to 2nd Column
+
+  data_table_5.format(formatter)
+
+  opts     = { :width => 600, :allowHtml => true, :showRowNumber => true }
+  @chart_5 = GoogleVisualr::Interactive::Table.new(data_table_5, opts)
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate JavaScript during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate JavaScript during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057985.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart_5'></div>
+  <%%= render_chart @chart_5, 'chart_5' %>
+    <% end %>
   </div>
 </div>

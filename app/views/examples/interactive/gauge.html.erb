@@ -22,12 +22,34 @@
     <p>
       In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
     </p>
-    <script src="https://gist.github.com/1057948.js?file=controller.rb"></script>
+    <%= codify_ruby do %>
+  # http://code.google.com/apis/chart/interactive/docs/gallery/gauge.html#Example
+  def gauge
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string'  , 'Label')
+    data_table.new_column('number'  , 'Value')
+    data_table.add_rows(3)
+    data_table.set_cell(0, 0, 'Memory' )
+    data_table.set_cell(0, 1, 80)
+    data_table.set_cell(1, 0, 'CPU'    )
+    data_table.set_cell(1, 1, 55)
+    data_table.set_cell(2, 0, 'Network')
+    data_table.set_cell(2, 1, 68)
+
+    opts   = { :width => 400, :height => 120, :redFrom => 90, :redTo => 100, :yellowFrom => 75, :yellowTo => 90, :minorTicks => 5 }
+    @chart = GoogleVisualr::Interactive::Gauge.new(data_table, opts)
+
+  end
+    <% end %>
   </div>
   <div>
     <p>
-      In your view, use the <em>to_js</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/gauge.html#Example" %>, during rendering of the view.
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavaScript", "http://code.google.com/apis/chart/interactive/docs/gallery/gauge.html#Example" %>, during rendering of the view.
     </p>
-    <script src="https://gist.github.com/1057948.js?file=view.html.erb"></script>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </div>
 </div>

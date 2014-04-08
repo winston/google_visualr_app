@@ -15,13 +15,35 @@
       <p>
         In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
       </p>
-      <script src="https://gist.github.com/1058132.js?file=controller.rb"></script>
+      <%= codify_ruby do %>
+  data_table  =
+    GoogleVisualr::DataTable.new(
+      {
+        :cols =>  [
+                    { :id => 'A', :label => 'NEW A'  , :type => 'string' },
+                    { :id => 'B', :label => 'B-label', :type => 'number' },
+                    { :id => 'C', :label => 'C-label', :type => 'date'   }
+                  ],
+        :rows =>  [
+                    { :c => [ {:v => 'a'}, {:v => 1.0, :f => 'One'}  , {:v => Date.parse('2008-02-28 00:31:26'), :f => '2/28/08 12:31 AM'} ] },
+                    { :c => [ {:v => 'b'}, {:v => 2.0, :f => 'Two'}  , {:v => Date.parse('2008-03-30 00:31:26'), :f => '3/30/08 12:31 AM'} ] },
+                    { :c => [ {:v => 'c'}, {:v => 3.0, :f => 'Three'}, {:v => Date.parse('2008-04-30 00:31:26'), :f => '4/30/08 12:31 AM'} ] }
+                  ]
+      }
+    )
+
+  opts   = { :width => 600, :allowHtml => true, :showRowNumber => true }
+  @chart = GoogleVisualr::Interactive::Table.new(data_table, opts)
+      <% end %>
     </div>
     <div>
       <p>
-        In your view, use the <em>to_js</em> method to generate JavaScript, during rendering of the view.
+        In your view, use the <em>render_chart</em> method to generate JavaScript, during rendering of the view.
       </p>
-      <script src="https://gist.github.com/1058132.js?file=view.html.erb"></script>
+      <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+      <% end %>
     </div>
   </div>
 </div>
