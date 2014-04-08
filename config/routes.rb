@@ -50,9 +50,11 @@ GoogleVisualrApp::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => "application#index"
 
-  match "docs"            => "docs#index"     , :as => :docs_index
-  match "docs/formatters" => "docs#formatters", :as => :docs_formatters
-  match "docs/roles"      => "docs#roles"     , :as => :docs_roles
+  match "docs"                    => "docs#index"               , :as => :docs_index
+  match "docs/formatters"         => "docs#formatters"          , :as => :docs_formatters
+  match "docs/roles"              => "docs#roles"               , :as => :docs_roles
+  match "docs/rails_ajax_example" => "docs#rails_ajax_example"  , :as => :docs_rails_ajax_example
+  match "docs/rails_ajax_chart"   => "docs#rails_ajax_chart"    , :as => :docs_rails_ajax_chart
 
   namespace "examples" do
     match "interactive(/:action)" => "interactive"

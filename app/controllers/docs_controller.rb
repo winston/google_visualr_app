@@ -170,4 +170,24 @@ class DocsController < ApplicationController
 
   end
 
+  def rails_ajax_example
+    # Renders page with button to retrieve Ajax chart
+  end
+
+  def rails_ajax_chart
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Year')
+    data_table.new_column('number', 'Sales')
+    data_table.new_column('number', 'Expenses')
+    data_table.add_rows( [
+                           ['2004', 1000, 400],
+                           ['2005', 1170, 460],
+                           ['2006', 660, 1120],
+                           ['2007', 1030, 540]
+                         ])
+
+    opts   = { width: 400, height: 240, title: 'Company Performance', hAxis: {title: 'Year', titleTextStyle: {color: '#FF0000'}} }
+    @chart = GoogleVisualr::Interactive::AreaChart.new(data_table, opts)
+  end
+
 end

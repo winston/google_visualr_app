@@ -3,7 +3,8 @@
     <title><%= meta_title %></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="http://www.google.com/jsapi"></script>
-    <%= stylesheet_link_tag "application"     , :media => "screen, projection"%>
+    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "application", :media => "screen, projection"%>
   </head>
 
   <body>
@@ -30,6 +31,9 @@
             <ul>
               <li><%= link_to 'Roles (Experimental)'  , docs_roles_url %></li>
             </ul>
+          </li>
+          <li>
+            <%= link_to 'Rails Ajax Example', docs_rails_ajax_example_url %>
           </li>
           <li>
             <strong>Charts Gallery</strong>

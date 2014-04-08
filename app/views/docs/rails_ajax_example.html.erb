@@ -1,0 +1,73 @@
+<h2>Rails Ajax Eample</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    This is an example of how you can render a chart with ajax, following the usual Rails ajax workflow.
+  </p>
+</div>
+
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <p>
+    To see this in action, please click on the "Get Ajax Chart" button below.
+  </p>
+  <%= form_tag("/docs/rails_ajax_chart", remote: true) do  %>
+    <%= submit_tag "Get Ajax Chart" %>
+  <%- end %>
+</div>
+
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+
+  <div>
+    <p>
+      The <em>form</em> code above that's been used to generate the chart via ajax.
+    </p>
+    <%= codify_html do %>
+  <%%= form_tag("/docs/rails_ajax_chart", remote: true) do  %>
+    <%%= submit_tag "Get Ajax Chart" %>
+  <%%- end %>
+    <% end %>
+  </div>
+
+  <div>
+    <p>
+      Based on the above example, we need a controller action that returns a chart at <em>controller#rails_ajax_chart</em>.
+    </p>
+    <%= codify_ruby do %>
+  # In controller#rails_ajax_chart
+
+  data_table = GoogleVisualr::DataTable.new
+  data_table.new_column('string', 'Year')
+  data_table.new_column('number', 'Sales')
+  data_table.new_column('number', 'Expenses')
+  data_table.add_rows( [
+    ['2004', 1000, 400],
+    ['2005', 1170, 460],
+    ['2006', 660, 1120],
+    ['2007', 1030, 540]
+  ])
+
+  opts   = { width: 400, height: 240, title: 'Company Performance', hAxis: {title: 'Year', titleTextStyle: {color: '#FF0000'}} }
+  @chart = GoogleVisualr::Interactive::AreaChart.new(data_table, opts)
+    <% end %>
+  </div>
+
+  <div>
+    <p>
+      Then, we'll render the chart with the <em>render_js</em> method in the view <em>rails_ajax_chart.js.erb</em>.
+    </p>
+    <p>
+      Unlike <em>render_chart</em>, <em>render_js</em> generates JavaScript without the <em>script</em> tag, and can be used within a JavaScript file.
+    </p>
+    <%= codify_html do %>
+  // In rails.ajax_chart.js.erb
+
+  $("form").append("<div id='chart'></div>");
+  <%%= render_chart @chart, "chart", script_tag: false %>
+    <% end %>
+  </div>
+</div>
