@@ -51,10 +51,10 @@
     </li>
   </ul>
   <p>
-    <code>
-      # Adds a column with data type and label<br/>
-      data_table.new_column('string', 'Name')
-    </code>
+    <%= codify_ruby do %>
+  # Adds a column with data type and label
+  data_table.new_column('string', 'Name')
+    <% end %>
   </p>
 </div>
 
@@ -71,10 +71,10 @@
     </li>
   </ul>
   <p>
-    <code>
-      # Adds 2 columns with data type and label<br/>
-      data_table.new_columns( [ { :type => 'string', :label => 'Name' }, { :type => 'number', :label => 'Age' }  ] )
-    </code>
+    <%= codify_ruby do %>
+  # Adds 2 columns with data type and label
+  data_table.new_columns( [ { :type => 'string', :label => 'Name' }, { :type => 'number', :label => 'Age' }  ] )
+    <% end %>
   </p>
 </div>
 
@@ -102,19 +102,19 @@
     </li>
   </ul>
   <p>
-    <code>
-      # Adds an empty row<br/>
-      data_table.add_row()<br/><br/>
+    <%= codify_ruby do %>
+  # Adds an empty row
+  data_table.add_row()
 
-      # Adds a row with a string and a date value<br/>
-      data_table.add_row( [ 'Hermione', Date.parse('1999-01-01') ] )<br/><br/>
+  # Adds a row with a string and a date value
+  data_table.add_row( [ 'Hermione', Date.parse('1999-01-01') ] )
 
-      # Adds a row with two cells; second cell with a formatted value<br/>
-      data_table.add_row( [ 'Hermione', {v: Date.parse('1999-01-01'), f: 'January First, Nineteen ninety-nine'} ] )<br/><br/>
+  # Adds a row with two cells; second cell with a formatted value
+  data_table.add_row( [ 'Hermione', {v: Date.parse('1999-01-01'), f: 'January First, Nineteen ninety-nine'} ] )
 
-      data_table.add_row( [ 'Col1Val', nil, 'Col3Val' ] ) // 2nd column is empty<br/>
-      data_table.add_row( [ 'Col1Val', '' , 'Col3Val' ] ) // 2nd column is empty
-    </code>
+  data_table.add_row( [ 'Col1Val', nil, 'Col3Val' ] ) # 2nd column is empty
+  data_table.add_row( [ 'Col1Val', '' , 'Col3Val' ] ) # 2nd column is empty
+    <% end %>
   </p>
 </div>
 
@@ -139,16 +139,16 @@
     </li>
   </ul>
   <p>
-    <code>
-      # Adds 2 rows<br/>
-      data_table.add_rows([<br/>
-      ['John', 18],<br/>
-      ['Jill', 22] <br/>
-      ])<br/><br/>
+    <%= codify_ruby do %>
+  # Adds 2 rows
+  data_table.add_rows([
+    ['John', 18],
+    ['Jill', 22]
+  ])
 
-      # Adds 5 empty rows<br/>
-      data_table.add_rows(5)
-    </code>
+  # Adds 5 empty rows
+  data_table.add_rows(5)
+    <% end %>
   </p>
 </div>
 
@@ -182,13 +182,13 @@
     </li>
   </ul>
   <p>
-    <code>
-      # Sets a cell without a formatted value<br/>
-      data_table.set_cell(0, 0, 'John')<br/><br/>
+    <%= codify_ruby do %>
+  # Sets a cell without a formatted value
+  data_table.set_cell(0, 0, 'John')
 
-      # Sets a cell with a formatted value<br/>
-      data_table.set_cell(0, 1, {:v => 18, :f => '18 years old'})
-    </code>
+  # Sets a cell with a formatted value
+  data_table.set_cell(0, 1, {:v => 18, :f => '18 years old'})
+    <% end %>
   </p>
 </div>
 
@@ -205,13 +205,13 @@
     </li>
   </ul>
   <p>
-    <code>
-      # Passes in 1 formatter<br/>
-      data_table.format(formatter)<br/><br/>
+    <%= codify_ruby do %>
+  # Passes in 1 formatter
+  data_table.format(formatter)
 
-      # Passes in 3 formatters<br/>
-      data_table.format(formatter_1, formatter_2, formatter_2)
-    </code>
+  # Passes in 3 formatters
+  data_table.format(formatter_1, formatter_2, formatter_2)
+    <% end %>
   </p>
 </div>
 

@@ -47,9 +47,9 @@
     Assuming you are on Rails 3, include the gem in your Gemfile.
   </p>
   <p>
-    <code>
-      gem "google_visualr", "~> 2.1.0"
-    </code>
+    <%= codify_ruby do %>
+  gem "google_visualr", "~> 2.1.0"
+    <% end %>
   </p>
 </div>
 
@@ -70,53 +70,53 @@
     1. In your Rails layout, load Google Ajax API in the <em>head</em> tag, at the very top.
   </p>
   <p>
-    <code>
-      &lt;script src='http://www.google.com/jsapi'&gt;&lt;/script&gt;
-    </code>
+    <%= codify_html do %>
+  <script src='http://www.google.com/jsapi'></script>;
+    <% end %>
   </p>
   <p>
     2. In your Rails controller, initialize a GoogleVisualr::DataTable object with an empty constructor.
   </p>
   <p>
-    <code>
-      data_table = GoogleVisualr::DataTable.new
-    </code>
+    <%= codify_ruby do %>
+  data_table = GoogleVisualr::DataTable.new
+    <% end %>
   </p>
   <p>
     3. Populate data_table with column headers, and row values.
   </p>
   <p>
-    <code>
-      # Add Column Headers                          <br/>
-      data_table.new_column('string', 'Year' )      <br/>
-      data_table.new_column('number', 'Sales')      <br/>
-      data_table.new_column('number', 'Expenses')   <br/><br/>
-      # Add Rows and Values                         <br/>
-      data_table.add_rows([                         <br/>
-      &nbsp;&nbsp;['2004', 1000, 400],              <br/>
-      &nbsp;&nbsp;['2005', 1170, 460],              <br/>
-      &nbsp;&nbsp;['2006', 660, 1120],              <br/>
-      &nbsp;&nbsp;['2007', 1030, 540]               <br/>
-      ])
-    </code>
+    <%= codify_ruby do %>
+  # Add Column Headers
+  data_table.new_column('string', 'Year' )
+  data_table.new_column('number', 'Sales')
+  data_table.new_column('number', 'Expenses')
+  # Add Rows and Values
+  data_table.add_rows([
+    ['2004', 1000, 400],
+    ['2005', 1170, 460],
+    ['2006', 660, 1120],
+    ['2007', 1030, 540]
+  ])
+    <% end %>
   </p>
   <p>
     4. Create a GoogleVisualr::AreaChart with data_table and configuration options.
   </p>
   <p>
-    <code>
-      option = { width: 400, height: 240, title: 'Company Performance' }<br/>
-      @chart = GoogleVisualr::Interactive::AreaChart.new(data_table, option)
-    </code>
+    <%= codify_ruby do %>
+  option = { width: 400, height: 240, title: 'Company Performance' }<br/>
+  @chart = GoogleVisualr::Interactive::AreaChart.new(data_table, option)
+    <% end %>
   </p>
   <p>
     5. In your Rails view, render the Google chart.
   </p>
   <p>
-    <code>
-      &lt;div id='chart'&gt;&lt;/div&gt;<br/>
-      &lt;%= render_chart(@chart, 'chart') %&gt;
-    </code>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
   </p>
 </div>
 

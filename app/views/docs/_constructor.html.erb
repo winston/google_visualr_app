@@ -4,12 +4,13 @@
     GoogleVisualr::DataTable have two constructors.
   </p>
   <p>
-    <code>
-      # Creates an empty data_table instance           <br/>
-      data_table = GoogleVisualr::DataTable.new        <br/><br/>
-      # Creates a populated data_table instance        <br/>
-      data_table = GoogleVisualr::DataTable.new(<em>data</em>)
-    </code>
+    <%= codify_ruby do %>
+  # Creates an empty data_table instance
+  data_table = GoogleVisualr::DataTable.new
+
+  # Creates a populated data_table instance
+  data_table = GoogleVisualr::DataTable.new(data)
+    <% end %>
   </p>
   <h6>GoogleVisualr::DataTable.new</h6>
   <p>

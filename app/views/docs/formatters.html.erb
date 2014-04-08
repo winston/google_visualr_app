@@ -24,29 +24,27 @@
     Firstly, initialize the required formatter, without (will use default) or with configuration options.
   </p>
   <p>
-    <code>
-      # Initialize with Width Option
-      <br/>
-      formatter = GoogleVisualr::BarFormat.new( { :width => 150 } )
-    </code>
+    <%= codify_ruby do %>
+  # Initialize with Width Option
+  formatter = GoogleVisualr::BarFormat.new( { :width => 150 } )
+    <% end %>
   </p>
   <p>
     Secondly, set the formatter to format the display values for specified column/s. The <em>columns</em> method is the only public method for a formatter.
   </p>
   <p>
-    <code>
-      # Apply to 2nd and 3rd Column
-      <br/>
-      formatter.columns(1,2)
-    </code>
+    <%= codify_ruby do %>
+  # Apply to 2nd and 3rd Column
+  formatter.columns(1,2)
+    <% end %>
   </p>
   <p>
     Finally, pass the formatter as an argument to a data_table's <em>format</em> method. That's all!
   </p>
   <p>
-    <code>
-      data_table.format(formatter)
-    </code>
+    <%= codify_ruby do %>
+  data_table.format(formatter)
+    <% end %>
   </p>
 </div>
 
