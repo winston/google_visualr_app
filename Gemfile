@@ -1,10 +1,10 @@
-ruby '2.0.0'
+ruby '2.1.3'
 
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.16'
 
-gem 'google_visualr', '~> 2.3.0'
+gem 'google_visualr', '~> 2.4.0'
 
 gem 'jquery-rails'
 
