@@ -44,9 +44,9 @@
     data_table.set_cell( 5, 1, 7  )
 
     opts   = {
-      :width => 400, :height => 240, :title => 'Age vs. Weight comparison',
-      :hAxis => { :title => 'Age'    , :minValue => 0, :maxValue => 15 },
-      :vAxis => { :title => 'Weight' , :minValue => 0, :maxValue => 15 },
+      :width  => 400, :height => 240, :title => 'Age vs. Weight comparison',
+      :hAxis  => { :title => 'Age', :minValue => 0, :maxValue => 15 },
+      :vAxis  => { :title => 'Weight', :minValue => 0, :maxValue => 15 },
       :legend => 'none'
     }
     @chart = GoogleVisualr::Interactive::ScatterChart.new(data_table, opts)

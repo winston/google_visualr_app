@@ -44,7 +44,7 @@
     data_table.set_cell(3, 1, 1030)
     data_table.set_cell(3, 2, 540)
 
-    opts   = { :width => 400, :height => 240, :title => 'Company Performance', :hAxis => { :title => 'Year', :titleTextStyle => {:color => 'red'} } }
+    opts   = { :width => 400, :height => 240, :title => 'Company Performance', :hAxis => { :title => 'Year', :titleTextStyle => { :color => 'red' } } }
     @chart = GoogleVisualr::Interactive::ColumnChart.new(data_table, opts)
 
   end

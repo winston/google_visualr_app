@@ -7,16 +7,20 @@ class DocsController < ApplicationController
 
     ##############################
     # Table with Constructor Format
-    data_table  = GoogleVisualr::DataTable.new({
-                    :cols =>  [ { :id => 'A', :label => 'NEW A'  , :type => 'string' },
-                                { :id => 'B', :label => 'B-label', :type => 'number' },
-                                { :id => 'C', :label => 'C-label', :type => 'date'   }
-                              ],
-                    :rows =>  [ { :c => [ {:v => 'a'}, {:v => 1.0, :f => 'One'}  , {:v => Date.parse('2008-02-28 00:31:26'), :f => '2/28/08 12:31 AM'} ] },
-                                { :c => [ {:v => 'b'}, {:v => 2.0, :f => 'Two'}  , {:v => Date.parse('2008-03-30 00:31:26'), :f => '3/30/08 12:31 AM'} ] },
-                                { :c => [ {:v => 'c'}, {:v => 3.0, :f => 'Three'}, {:v => Date.parse('2008-04-30 00:31:26'), :f => '4/30/08 12:31 AM'} ] }
-                              ]
-                  })
+    data_table  = GoogleVisualr::DataTable.new(
+      {
+        :cols =>  [
+          { :id => 'A', :label => 'NEW A'  , :type => 'string' },
+          { :id => 'B', :label => 'B-label', :type => 'number' },
+          { :id => 'C', :label => 'C-label', :type => 'date'   }
+        ],
+        :rows =>  [
+          { :c => [ {:v => 'a'}, {:v => 1.0, :f => 'One'}  , {:v => Date.parse('2008-02-28 00:31:26'), :f => '2/28/08 12:31 AM'} ] },
+          { :c => [ {:v => 'b'}, {:v => 2.0, :f => 'Two'}  , {:v => Date.parse('2008-03-30 00:31:26'), :f => '3/30/08 12:31 AM'} ] },
+          { :c => [ {:v => 'c'}, {:v => 3.0, :f => 'Three'}, {:v => Date.parse('2008-04-30 00:31:26'), :f => '4/30/08 12:31 AM'} ] }
+        ]
+      }
+    )
 
     opts   = { :width => 600, :allowHtml => true, :showRowNumber => true }
     @chart = GoogleVisualr::Interactive::Table.new(data_table, opts)
@@ -61,7 +65,7 @@ class DocsController < ApplicationController
       ['Art'        , 1100  ]
     ])
 
-    formatter = GoogleVisualr::BarFormat.new( { :width => 150 } )
+    formatter = GoogleVisualr::BarFormat.new({ :width => 150 })
     formatter.columns(1) # Apply to 2nd Column
 
     data_table_2.format(formatter)
@@ -179,14 +183,16 @@ class DocsController < ApplicationController
     data_table.new_column('string', 'Year')
     data_table.new_column('number', 'Sales')
     data_table.new_column('number', 'Expenses')
-    data_table.add_rows( [
-                           ['2004', 1000, 400],
-                           ['2005', 1170, 460],
-                           ['2006', 660, 1120],
-                           ['2007', 1030, 540]
-                         ])
+    data_table.add_rows(
+      [
+        ['2004', 1000, 400],
+        ['2005', 1170, 460],
+        ['2006', 660, 1120],
+        ['2007', 1030, 540]
+      ]
+    )
 
-    opts   = { width: 400, height: 240, title: 'Company Performance', hAxis: {title: 'Year', titleTextStyle: {color: '#FF0000'}} }
+    opts   = { width: 400, height: 240, title: 'Company Performance', hAxis: { title: 'Year', titleTextStyle: { color: '#FF0000' } } }
     @chart = GoogleVisualr::Interactive::AreaChart.new(data_table, opts)
   end
 

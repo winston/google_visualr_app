@@ -13,14 +13,16 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('number', 'Sold Pens'   )
     data_table.new_column('string', 'title2')
     data_table.new_column('string', 'text2' )
-    data_table.add_rows( [
-      [ Date.parse("2008-2-1"), 30000, '', '', 40645, '', ''],
-      [ Date.parse("2008-2-2"), 14045, '', '', 20374, '', ''],
-      [ Date.parse("2008-2-3"), 55022, '', '', 50766, '', ''],
-      [ Date.parse("2008-2-4"), 75284, '', '', 14334, 'Out of Stock','Ran out of stock on pens at 4pm'],
-      [ Date.parse("2008-2-5"), 41476, 'Bought Pens','Bought 200k pens', 66467, '', ''],
-      [ Date.parse("2008-2-6"), 33322, '', '', 39463, '', '']
-    ] )
+    data_table.add_rows(
+      [
+        [ Date.parse("2008-2-1"), 30000, '', '', 40645, '', ''],
+        [ Date.parse("2008-2-2"), 14045, '', '', 20374, '', ''],
+        [ Date.parse("2008-2-3"), 55022, '', '', 50766, '', ''],
+        [ Date.parse("2008-2-4"), 75284, '', '', 14334, 'Out of Stock','Ran out of stock on pens at 4pm'],
+        [ Date.parse("2008-2-5"), 41476, 'Bought Pens','Bought 200k pens', 66467, '', ''],
+        [ Date.parse("2008-2-6"), 33322, '', '', 39463, '', '']
+      ]
+    )
 
     opts   = { :displayAnnotations => true }
     @chart = GoogleVisualr::Interactive::AnnotatedTimeLine.new(data_table, opts)
@@ -49,8 +51,8 @@ class Examples::InteractiveController < ApplicationController
       ]
     )
 
-    opts    = { :displayAnnotations => true }
-    @chart  = GoogleVisualr::Interactive::AnnotationChart.new(data_table, opts)
+    opts   = { :displayAnnotations => true }
+    @chart = GoogleVisualr::Interactive::AnnotationChart.new(data_table, opts)
 
   end
 
@@ -61,14 +63,16 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('string', 'Year')
     data_table.new_column('number', 'Sales')
     data_table.new_column('number', 'Expenses')
-    data_table.add_rows( [
-      ['2004', 1000, 400],
-      ['2005', 1170, 460],
-      ['2006', 660, 1120],
-      ['2007', 1030, 540]
-    ])
+    data_table.add_rows(
+      [
+        ['2004', 1000, 400],
+        ['2005', 1170, 460],
+        ['2006', 660, 1120],
+        ['2007', 1030, 540]
+      ]
+    )
 
-    opts   = { width: 400, height: 240, title: 'Company Performance', hAxis: {title: 'Year', titleTextStyle: {color: '#FF0000'}} }
+    opts   = { width: 400, height: 240, title: 'Company Performance', hAxis: { title: 'Year', titleTextStyle: { color: '#FF0000' } } }
     @chart = GoogleVisualr::Interactive::AreaChart.new(data_table, opts)
 
   end
@@ -94,7 +98,7 @@ class Examples::InteractiveController < ApplicationController
     data_table.set_cell(3, 1, 1030)
     data_table.set_cell(3, 2, 540)
 
-    opts   = { :width => 400, :height => 240, :title => 'Company Performance', vAxis: {title: 'Year', titleTextStyle: {color: 'red'}} }
+    opts   = { :width => 400, :height => 240, :title => 'Company Performance', vAxis: { title: 'Year', titleTextStyle: { color: 'red' } } }
     @chart = GoogleVisualr::Interactive::BarChart.new(data_table, opts)
 
   end
@@ -108,27 +112,29 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('number', 'Fertility Rate')
     data_table.new_column('string', 'Region')
     data_table.new_column('number', 'Population')
-    data_table.add_rows( [
-      ['CAN',    80.66,              1.67,      'North America',  33739900],
-      ['DEU',    79.84,              1.36,      'Europe',         81902307],
-      ['DNK',    78.6,               1.84,      'Europe',         5523095],
-      ['EGY',    72.73,              2.78,      'Middle East',    79716203],
-      ['GBR',    80.05,              2,         'Europe',         61801570],
-      ['IRN',    72.49,              1.7,       'Middle East',    73137148],
-      ['IRQ',    68.09,              4.77,      'Middle East',    31090763],
-      ['ISR',    81.55,              2.96,      'Middle East',    7485600],
-      ['RUS',    68.6,               1.54,      'Europe',         141850000],
-      ['USA',    78.09,              2.05,      'North America',  307007000]
-    ])
+    data_table.add_rows(
+      [
+        ['CAN',    80.66,              1.67,      'North America',  33739900],
+        ['DEU',    79.84,              1.36,      'Europe',         81902307],
+        ['DNK',    78.6,               1.84,      'Europe',         5523095],
+        ['EGY',    72.73,              2.78,      'Middle East',    79716203],
+        ['GBR',    80.05,              2,         'Europe',         61801570],
+        ['IRN',    72.49,              1.7,       'Middle East',    73137148],
+        ['IRQ',    68.09,              4.77,      'Middle East',    31090763],
+        ['ISR',    81.55,              2.96,      'Middle East',    7485600],
+        ['RUS',    68.6,               1.54,      'Europe',         141850000],
+        ['USA',    78.09,              2.05,      'North America',  307007000]
+      ]
+    )
 
-    opts    = {
-      :width => 800, :height => 500,
-      :title => 'Correlation between life expectancy, fertility rate and population of some world countries (2010)',
-      :hAxis => { :title => 'Life Expectancy' },
-      :vAxis => { :title => 'Fertility Rate'  },
+    opts   = {
+      :width  => 800, :height => 500,
+      :title  => 'Correlation between life expectancy, fertility rate and population of some world countries (2010)',
+      :hAxis  => { :title => 'Life Expectancy' },
+      :vAxis  => { :title => 'Fertility Rate' },
       :bubble => { :textStyle => { :fontSize => 11 } }
-     }
-     @chart = GoogleVisualr::Interactive::BubbleChart.new(data_table, opts)
+    }
+    @chart = GoogleVisualr::Interactive::BubbleChart.new(data_table, opts)
 
   end
 
@@ -156,8 +162,8 @@ class Examples::InteractiveController < ApplicationController
       ]
     )
 
-    opts    = { :title => "Red Sox Attendance", :width => 800, :height => 300, calendar: { cellSize: 13.5 } }
-    @chart  = GoogleVisualr::Interactive::Calendar.new(data_table, opts)
+    opts   = { :title => "Red Sox Attendance", :width => 800, :height => 300, calendar: { cellSize: 13.5 } }
+    @chart = GoogleVisualr::Interactive::Calendar.new(data_table, opts)
 
   end
 
@@ -170,13 +176,15 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('number', 'opening')
     data_table.new_column('number', 'closing')
     data_table.new_column('number', 'max')
-    data_table.add_rows( [
-      ['Mon',20,28,38,45],
-      ['Tue',31,38,55,66],
-      ['Wed',50,55,77,80],
-      ['Thu',50,77,66,77],
-      ['Fri',15,66,22,68]
-    ] )
+    data_table.add_rows(
+      [
+        ['Mon',20,28,38,45],
+        ['Tue',31,38,55,66],
+        ['Wed',50,55,77,80],
+        ['Thu',50,77,66,77],
+        ['Fri',15,66,22,68]
+      ]
+    )
 
     opts   = { :width => 400, :height => 240, :legend => 'none' }
     @chart = GoogleVisualr::Interactive::CandlestickChart.new(data_table, opts)
@@ -204,7 +212,7 @@ class Examples::InteractiveController < ApplicationController
     data_table.set_cell(3, 1, 1030)
     data_table.set_cell(3, 2, 540)
 
-    opts   = { :width => 400, :height => 240, :title => 'Company Performance', :hAxis => { :title => 'Year', :titleTextStyle => {:color => 'red'} } }
+    opts   = { :width => 400, :height => 240, :title => 'Company Performance', :hAxis => { :title => 'Year', :titleTextStyle => { :color => 'red' } } }
     @chart = GoogleVisualr::Interactive::ColumnChart.new(data_table, opts)
 
   end
@@ -220,15 +228,17 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('number', 'Papua Guinea')
     data_table.new_column('number', 'Rwanda'      )
     data_table.new_column('number', 'Avarage'     )
-    data_table.add_rows( [
-      ['2004/05', 165, 938  , 522, 998  , 450, 614.6],
-      ['2005/06', 135, 1120 , 599, 1268 , 288, 682  ],
-      ['2006/07', 157, 1167 , 587, 807  , 397, 623  ],
-      ['2007/08', 139, 1110 , 615, 968  , 215, 609.4],
-      ['2008/09', 136, 691  , 629, 1026 , 366, 569.6]
-    ] )
+    data_table.add_rows(
+      [
+        ['2004/05', 165, 938  , 522, 998  , 450, 614.6],
+        ['2005/06', 135, 1120 , 599, 1268 , 288, 682  ],
+        ['2006/07', 157, 1167 , 587, 807  , 397, 623  ],
+        ['2007/08', 139, 1110 , 615, 968  , 215, 609.4],
+        ['2008/09', 136, 691  , 629, 1026 , 366, 569.6]
+      ]
+    )
 
-    opts   = { :width => 700, :height => 400, :title => 'Monthly Coffee Production by Country', :vAxis => {:title => 'Cups'}, :hAxis => {:title => 'Month'}, :seriesType => 'bars', :series => {'5' => {:type => 'line'}} }
+    opts   = { :width => 700, :height => 400, :title => 'Monthly Coffee Production by Country', :vAxis => { :title => 'Cups' }, :hAxis => { :title => 'Month' }, :seriesType => 'bars', :series => { '5' => { :type => 'line' } } }
     @chart = GoogleVisualr::Interactive::ComboChart.new(data_table, opts)
 
   end
@@ -259,7 +269,7 @@ class Examples::InteractiveController < ApplicationController
       ]
     )
 
-    opts = { version: "1.1", height: 275 }
+    opts   = { version: "1.1", height: 275 }
     @chart = GoogleVisualr::Interactive::GanttChart.new(data_table, opts)
 
   end
@@ -290,17 +300,17 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('string', 'Country')
     data_table.new_column('number', 'Popularity')
     data_table.add_rows(6)
-    data_table.set_cell(0, 0, 'Germany')
+    data_table.set_cell(0, 0, 'Germany'      )
     data_table.set_cell(0, 1, 200)
     data_table.set_cell(1, 0, 'United States')
     data_table.set_cell(1, 1, 300)
-    data_table.set_cell(2, 0, 'Brazil')
+    data_table.set_cell(2, 0, 'Brazil'       )
     data_table.set_cell(2, 1, 400)
-    data_table.set_cell(3, 0, 'Canada')
+    data_table.set_cell(3, 0, 'Canada'       )
     data_table.set_cell(3, 1, 500)
-    data_table.set_cell(4, 0, 'France')
+    data_table.set_cell(4, 0, 'France'       )
     data_table.set_cell(4, 1, 600)
-    data_table.set_cell(5, 0, 'RU')
+    data_table.set_cell(5, 0, 'RU'           )
     data_table.set_cell(5, 1, 700)
 
     opts   = { :width => 500, :height => 300 }
@@ -329,7 +339,7 @@ class Examples::InteractiveController < ApplicationController
     data_table_regions.set_cell(5, 0, 'RU'           )
     data_table_regions.set_cell(5, 1, 700)
 
-    opts   = { :dataMode => 'regions' }
+    opts           = { :dataMode => 'regions' }
     @chart_regions = GoogleVisualr::Interactive::GeoMap.new(data_table_regions, opts)
 
     # Markers Example
@@ -350,7 +360,7 @@ class Examples::InteractiveController < ApplicationController
     data_table_markers.set_cell(5, 0, 'Houston'      )
     data_table_markers.set_cell(5, 1, 700)
 
-    opts   = { :dataMode => 'markers', :region => 'US', :colors => ['0xFF8747', '0xFFB581', '0xc06000'] }
+    opts           = { :dataMode => 'markers', :region => 'US', :colors => ['0xFF8747', '0xFFB581', '0xc06000'] }
     @chart_markers = GoogleVisualr::Interactive::GeoMap.new(data_table_markers, opts)
 
   end
@@ -394,7 +404,7 @@ class Examples::InteractiveController < ApplicationController
       ]
     )
 
-    opts   = { :width => 700, :height => 400, :title => 'Lengths of dinosaurs, in meters', :legend => {position: 'none'} }
+    opts   = { :width => 700, :height => 400, :title => 'Lengths of dinosaurs, in meters', :legend => { position: 'none' } }
     @chart = GoogleVisualr::Interactive::Histogram.new(data_table, opts)
 
   end
@@ -489,14 +499,16 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('number', 'Sales'   )
     data_table.new_column('number', 'Expenses')
     data_table.new_column('string', 'Location')
-    data_table.add_rows([
-      ['Apples' ,Date.parse("1988-01-01"),1000,300,'East'],
-      ['Oranges',Date.parse("1988-01-01"),1150,200,'West'],
-      ['Bananas',Date.parse("1988-01-01"),300 ,250,'West'],
-      ['Apples' ,Date.parse("1989-07-01"),1200,400,'East'],
-      ['Oranges',Date.parse("1989-07-01"),750 ,150,'West'],
-      ['Bananas',Date.parse("1989-07-01"),788 ,617,'West']
-    ])
+    data_table.add_rows(
+      [
+        ['Apples' ,Date.parse("1988-01-01"),1000,300,'East'],
+        ['Oranges',Date.parse("1988-01-01"),1150,200,'West'],
+        ['Bananas',Date.parse("1988-01-01"),300 ,250,'West'],
+        ['Apples' ,Date.parse("1989-07-01"),1200,400,'East'],
+        ['Oranges',Date.parse("1989-07-01"),750 ,150,'West'],
+        ['Bananas',Date.parse("1989-07-01"),788 ,617,'West']
+      ]
+    )
 
     opts   = { :width => 600, :height => 300 }
     @chart = GoogleVisualr::Interactive::MotionChart.new(data_table, opts)
@@ -510,13 +522,15 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('string', 'Name'   )
     data_table.new_column('string', 'Manager')
     data_table.new_column('string', 'ToolTip')
-    data_table.add_rows( [
-      [ {:v => 'Mike', :f => 'Mike<div style="color:red; font-style:italic">President</div>'   }, ''    , 'The President' ],
-      [ {:v => 'Jim' , :f => 'Jim<div style="color:red; font-style:italic">Vice President<div>'}, 'Mike', 'VP'            ],
-      [ 'Alice'  , 'Mike', ''           ],
-      [ 'Bob'    , 'Jim' , 'Bob Sponge' ],
-      [ 'Carol'  , 'Bob' , ''           ]
-    ] )
+    data_table.add_rows(
+      [
+        [ {:v => 'Mike', :f => 'Mike<div style="color:red; font-style:italic">President</div>'   }, ''    , 'The President' ],
+        [ {:v => 'Jim' , :f => 'Jim<div style="color:red; font-style:italic">Vice President<div>'}, 'Mike', 'VP'            ],
+        [ 'Alice'  , 'Mike', ''           ],
+        [ 'Bob'    , 'Jim' , 'Bob Sponge' ],
+        [ 'Carol'  , 'Bob' , ''           ]
+      ]
+    )
 
     opts   = { :allowHtml => true }
     @chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
@@ -564,7 +578,7 @@ class Examples::InteractiveController < ApplicationController
       ]
     )
 
-    opts = { width: 600 }
+    opts   = { width: 600 }
     @chart = GoogleVisualr::Interactive::Sankey.new(data_table, opts)
 
   end
@@ -590,9 +604,9 @@ class Examples::InteractiveController < ApplicationController
     data_table.set_cell( 5, 1, 7  )
 
     opts   = {
-      :width => 400, :height => 240, :title => 'Age vs. Weight comparison',
-      :hAxis => { :title => 'Age'    , :minValue => 0, :maxValue => 15 },
-      :vAxis => { :title => 'Weight' , :minValue => 0, :maxValue => 15 },
+      :width  => 400, :height => 240, :title => 'Age vs. Weight comparison',
+      :hAxis  => { :title => 'Age', :minValue => 0, :maxValue => 15 },
+      :vAxis  => { :title => 'Weight', :minValue => 0, :maxValue => 15 },
       :legend => 'none'
     }
     @chart = GoogleVisualr::Interactive::ScatterChart.new(data_table, opts)
@@ -606,14 +620,16 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('string'  , 'Director (Year)')
     data_table.new_column('number'  , 'Rotten Tomatoes')
     data_table.new_column('number' , 'IMDB')
-    data_table.add_rows( [
-      ['Alfred Hitchcock (1935)', 8.4,         7.9],
-      ['Ralph Thomas (1959)',     6.9,         6.5],
-      ['Don Sharp (1978)',        6.5,         6.4],
-      ['James Hawes (2008)',      4.4,         6.2]
-    ])
+    data_table.add_rows(
+      [
+        ['Alfred Hitchcock (1935)', 8.4,         7.9],
+        ['Ralph Thomas (1959)',     6.9,         6.5],
+        ['Don Sharp (1978)',        6.5,         6.4],
+        ['James Hawes (2008)',      4.4,         6.2]
+      ]
+    )
 
-    opts   = { :width => 800, :height => 500, :title => "The decline of 'The 39 Steps'", :vAxis => { :title => 'Accumulated Rating'}, :isStacked => true }
+    opts   = { :width => 800, :height => 500, :title => "The decline of 'The 39 Steps'", :vAxis => { :title => 'Accumulated Rating' }, :isStacked => true }
     @chart = GoogleVisualr::Interactive::SteppedAreaChart.new(data_table, opts)
 
   end
@@ -652,36 +668,38 @@ class Examples::InteractiveController < ApplicationController
     data_table.new_column('string', 'Parent')
     data_table.new_column('number', 'Market trade volume (size)')
     data_table.new_column('number', 'Market increase/decrease (color)')
-    data_table.add_rows( [
-      ["Global"   , nil      , 0 , 0   ],
-      ["America"  , "Global"  , 0 , 0   ],
-      ["Europe"   , "Global"  , 0 , 0   ],
-      ["Asia"     , "Global"  , 0 , 0   ],
-      ["Australia", "Global"  , 0 , 0   ],
-      ["Africa"   , "Global"  , 0 , 0   ],
-      ["Brazil"   , "America" , 11, 10  ],
-      ["USA"      , "America" , 52, 31  ],
-      ["Mexico"   , "America" , 24, 12  ],
-      ["Canada"   , "America" , 16, -23 ],
-      ["France"   , "Europe"  , 42, -11 ],
-      ["Germany"  , "Europe"  , 31, -2  ],
-      ["Sweden"   , "Europe"  , 22, -13 ],
-      ["Italy"    , "Europe"  , 17, 4   ],
-      ["UK"       , "Europe"  , 21, -5  ],
-      ["China"    , "Asia"    , 36, 4   ],
-      ["Japan"    , "Asia"    , 20, -12 ],
-      ["India"    , "Asia"    , 40, 63  ],
-      ["Laos"     , "Asia"    , 4 , 34  ],
-      ["Mongolia" , "Asia"    , 1 , -5  ],
-      ["Israel"   , "Asia"    , 12, 24  ],
-      ["Iran"     , "Asia"    , 18, 13  ],
-      ["Pakistan" , "Asia"    , 11, -52 ],
-      ["Egypt"    , "Africa"  , 21, 0   ],
-      ["S. Africa", "Africa"  , 30, 43  ],
-      ["Sudan"    , "Africa"  , 12, 2   ],
-      ["Congo"    , "Africa"  , 10, 12  ],
-      ["Zair"     , "Africa"  , 8 , 10  ]
-    ] )
+    data_table.add_rows(
+      [
+        ["Global"   , nil      , 0 , 0    ],
+        ["America"  , "Global"  , 0 , 0   ],
+        ["Europe"   , "Global"  , 0 , 0   ],
+        ["Asia"     , "Global"  , 0 , 0   ],
+        ["Australia", "Global"  , 0 , 0   ],
+        ["Africa"   , "Global"  , 0 , 0   ],
+        ["Brazil"   , "America" , 11, 10  ],
+        ["USA"      , "America" , 52, 31  ],
+        ["Mexico"   , "America" , 24, 12  ],
+        ["Canada"   , "America" , 16, -23 ],
+        ["France"   , "Europe"  , 42, -11 ],
+        ["Germany"  , "Europe"  , 31, -2  ],
+        ["Sweden"   , "Europe"  , 22, -13 ],
+        ["Italy"    , "Europe"  , 17, 4   ],
+        ["UK"       , "Europe"  , 21, -5  ],
+        ["China"    , "Asia"    , 36, 4   ],
+        ["Japan"    , "Asia"    , 20, -12 ],
+        ["India"    , "Asia"    , 40, 63  ],
+        ["Laos"     , "Asia"    , 4 , 34  ],
+        ["Mongolia" , "Asia"    , 1 , -5  ],
+        ["Israel"   , "Asia"    , 12, 24  ],
+        ["Iran"     , "Asia"    , 18, 13  ],
+        ["Pakistan" , "Asia"    , 11, -52 ],
+        ["Egypt"    , "Africa"  , 21, 0   ],
+        ["S. Africa", "Africa"  , 30, 43  ],
+        ["Sudan"    , "Africa"  , 12, 2   ],
+        ["Congo"    , "Africa"  , 10, 12  ],
+        ["Zair"     , "Africa"  , 8 , 10  ]
+      ]
+    )
 
     opts   = { :width => 600, :height => 600, :minColor => '#f00', :midColor => '#ddd', :maxColor => '#0d0', :headerHeight => 15, :fontColor => 'black', :showScale => true }
     @chart = GoogleVisualr::Interactive::TreeMap.new(data_table, opts)

@@ -32,14 +32,16 @@
     data_table.new_column('number', 'Sales'   )
     data_table.new_column('number', 'Expenses')
     data_table.new_column('string', 'Location')
-    data_table.add_rows([
-      ['Apples' ,Date.parse("1988-01-01"),1000,300,'East'],
-      ['Oranges',Date.parse("1988-01-01"),1150,200,'West'],
-      ['Bananas',Date.parse("1988-01-01"),300 ,250,'West'],
-      ['Apples' ,Date.parse("1989-07-01"),1200,400,'East'],
-      ['Oranges',Date.parse("1989-07-01"),750 ,150,'West'],
-      ['Bananas',Date.parse("1989-07-01"),788 ,617,'West']
-    ])
+    data_table.add_rows(
+      [
+        ['Apples' ,Date.parse("1988-01-01"),1000,300,'East'],
+        ['Oranges',Date.parse("1988-01-01"),1150,200,'West'],
+        ['Bananas',Date.parse("1988-01-01"),300 ,250,'West'],
+        ['Apples' ,Date.parse("1989-07-01"),1200,400,'East'],
+        ['Oranges',Date.parse("1989-07-01"),750 ,150,'West'],
+        ['Bananas',Date.parse("1989-07-01"),788 ,617,'West']
+      ]
+    )
 
     opts   = { :width => 600, :height => 300 }
     @chart = GoogleVisualr::Interactive::MotionChart.new(data_table, opts)
