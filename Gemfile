@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.19'
 
-gem 'google_visualr', '~> 2.4.0'
+gem 'google_visualr', '~> 2.5.0'
 
 gem 'jquery-rails'
 
