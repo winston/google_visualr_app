@@ -1,0 +1,69 @@
+<h2>GoogleVisualr - Calendar</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    A calendar chart is a visualization used to show activity over the course of a long span of time, such as months or years.
+  </p>
+  <p>
+    They're best used when you want to illustrate how some quantity varies depending on the day of the week, or how it trends over time.
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "https://developers.google.com/chart/interactive/docs/gallery/calendar" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart'></div>
+  <%= render_chart @chart, 'chart' %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
+    </p>
+    <%= codify_ruby do %>
+  # https://developers.google.com/chart/interactive/docs/gallery/calendar#a-simple-example
+  def calendar
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('date'  , 'Date')
+    data_table.new_column('number', 'Won/Loss')
+    data_table.add_rows(
+      [
+        [Date.parse("2012-3-13"), 37032],
+        [Date.parse("2012-3-14"), 38024],
+        [Date.parse("2012-3-15"), 38024],
+        [Date.parse("2012-3-16"), 38108],
+        [Date.parse("2012-3-17"), 38229],
+        [Date.parse("2013-9-4") , 38177],
+        [Date.parse("2013-9-5") , 38705],
+        [Date.parse("2013-9-12"), 38210],
+        [Date.parse("2013-9-13"), 38029],
+        [Date.parse("2013-9-19"), 38823],
+        [Date.parse("2013-9-23"), 38345],
+        [Date.parse("2013-9-24"), 38436],
+        [Date.parse("2013-9-30"), 38447]
+      ]
+    )
+
+    opts    = { :title => "Red Sox Attendance", :width => 800, :height => 300, calendar: { cellSize: 13.5 } }
+    @chart  = GoogleVisualr::Interactive::Calendar.new(data_table, opts)
+
+  end
+
+    <% end %>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavasScript", "https://developers.google.com/chart/interactive/docs/gallery/calendar#a-simple-example" %>, during rendering of the view.
+    </p>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
+  </div>
+</div>

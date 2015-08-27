@@ -1,0 +1,68 @@
+<h2>GoogleVisualr - Gantt Chart</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    A Gantt chart is a type of chart that illustrates the breakdown of a project into its component tasks, rendered in SVG.
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "https://developers.google.com/chart/interactive/docs/gallery/ganttchart" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart'></div>
+  <%= render_chart @chart, 'chart' %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
+    </p>
+    <%= codify_ruby do %>
+  # https://developers.google.com/chart/interactive/docs/gallery/ganttchart#grouping-resources
+  def gantt_chart
+
+    def days_to_milli(days)
+      days * 24 * 60 * 60 * 1000;
+    end
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Task ID')
+    data_table.new_column('string', 'Task Name')
+    data_table.new_column('string', 'Resource')
+    data_table.new_column('date'  , 'Start Date')
+    data_table.new_column('date'  , 'End Date')
+    data_table.new_column('number', 'Duration')
+    data_table.new_column('number', 'Percent Complete')
+    data_table.new_column('string', 'Dependencies')
+    data_table.add_rows(
+      [
+        ['Research' , 'Find sources'        , nil       , Date.parse("2015-1-1"), Date.parse("2015-1-5")  , nil               , 100 , nil],
+        ['Write'    , 'Write paper'         , 'write'   , nil                   , Date.parse("2015-1-9")  , days_to_milli(3)  , 25  , 'Research, Outline'],
+        ['Cite'     , 'Create bibliography' , 'write'   , nil                   , Date.parse("2015-1-7")  , days_to_milli(1)  , 20  , 'Research'],
+        ['Complete' , 'Hand in paper'       , 'complete', nil                   , Date.parse("2015-1-10") , days_to_milli(1)  , 0   , 'Cite, Write'],
+        ['Outline'  , 'Outline paper'       , 'write'   , nil                   , Date.parse("2015-1-6")  , days_to_milli(1)  , 100 , 'Research']
+      ]
+    )
+
+    opts = { version: "1.1", height: 275 }
+    @chart = GoogleVisualr::Interactive::GanttChart.new(data_table, opts)
+
+  end
+
+    <% end %>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavasScript", "https://developers.google.com/chart/interactive/docs/gallery/ganttchart#grouping-resources" %>, during rendering of the view.
+    </p>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
+  </div>
+</div>

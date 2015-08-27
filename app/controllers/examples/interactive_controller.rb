@@ -27,6 +27,33 @@ class Examples::InteractiveController < ApplicationController
 
   end
 
+  # https://developers.google.com/chart/interactive/docs/gallery/annotationchart#example
+  def annotation_chart
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('date', 'Date')
+    data_table.new_column('number', 'Kepler-22b mission')
+    data_table.new_column('string', 'Kepler title')
+    data_table.new_column('string', 'Kepler text')
+    data_table.new_column('number', 'Gliese 163 mission')
+    data_table.new_column('string', 'Gliese title')
+    data_table.new_column('string', 'Gliese text')
+    data_table.add_rows(
+      [
+        [Date.parse("2314-2-15"), 12400, nil, nil, 10645, nil, nil],
+        [Date.parse("2314-2-16"), 24045, 'Lalibertines', 'First encounter', 12374, nil, nil],
+        [Date.parse("2314-2-17"), 35022, 'Lalibertines', 'They are very tall', 15766, 'Gallantors', 'First Encounter'],
+        [Date.parse("2314-2-18"), 12284, 'Lalibertines', 'Attack on our crew!', 34334, 'Gallantors', 'Statement of shared principles'],
+        [Date.parse("2314-2-19"), 8476, 'Lalibertines', 'Heavy casualties', 66467, 'Gallantors', 'Mysteries revealed'],
+        [Date.parse("2314-2-20"), 0, 'Lalibertines', 'All crew lost', 79463, 'Gallantors', 'Omniscience achieved']
+      ]
+    )
+
+    opts    = { :displayAnnotations => true }
+    @chart  = GoogleVisualr::Interactive::AnnotationChart.new(data_table, opts)
+
+  end
+
   # http://code.google.com/apis/chart/interactive/docs/gallery/areachart.html#Example
   def area_chart
 
@@ -72,7 +99,7 @@ class Examples::InteractiveController < ApplicationController
 
   end
 
-  # http://code.google.com/apis/chart/interactive/docs/gallery/bubblechart.html
+  # http://code.google.com/apis/chart/interactive/docs/gallery/bubblechart.html#Example
   def bubble_chart
 
     data_table = GoogleVisualr::DataTable.new
@@ -102,6 +129,35 @@ class Examples::InteractiveController < ApplicationController
       :bubble => { :textStyle => { :fontSize => 11 } }
      }
      @chart = GoogleVisualr::Interactive::BubbleChart.new(data_table, opts)
+
+  end
+
+  # https://developers.google.com/chart/interactive/docs/gallery/calendar#a-simple-example
+  def calendar
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('date'  , 'Date')
+    data_table.new_column('number', 'Won/Loss')
+    data_table.add_rows(
+      [
+        [Date.parse("2012-3-13"), 37032],
+        [Date.parse("2012-3-14"), 38024],
+        [Date.parse("2012-3-15"), 38024],
+        [Date.parse("2012-3-16"), 38108],
+        [Date.parse("2012-3-17"), 38229],
+        [Date.parse("2013-9-4") , 38177],
+        [Date.parse("2013-9-5") , 38705],
+        [Date.parse("2013-9-12"), 38210],
+        [Date.parse("2013-9-13"), 38029],
+        [Date.parse("2013-9-19"), 38823],
+        [Date.parse("2013-9-23"), 38345],
+        [Date.parse("2013-9-24"), 38436],
+        [Date.parse("2013-9-30"), 38447]
+      ]
+    )
+
+    opts    = { :title => "Red Sox Attendance", :width => 800, :height => 300, calendar: { cellSize: 13.5 } }
+    @chart  = GoogleVisualr::Interactive::Calendar.new(data_table, opts)
 
   end
 
@@ -174,6 +230,37 @@ class Examples::InteractiveController < ApplicationController
 
     opts   = { :width => 700, :height => 400, :title => 'Monthly Coffee Production by Country', :vAxis => {:title => 'Cups'}, :hAxis => {:title => 'Month'}, :seriesType => 'bars', :series => {'5' => {:type => 'line'}} }
     @chart = GoogleVisualr::Interactive::ComboChart.new(data_table, opts)
+
+  end
+
+  # https://developers.google.com/chart/interactive/docs/gallery/ganttchart#grouping-resources
+  def gantt_chart
+
+    def days_to_milli(days)
+      days * 24 * 60 * 60 * 1000;
+    end
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Task ID')
+    data_table.new_column('string', 'Task Name')
+    data_table.new_column('string', 'Resource')
+    data_table.new_column('date'  , 'Start Date')
+    data_table.new_column('date'  , 'End Date')
+    data_table.new_column('number', 'Duration')
+    data_table.new_column('number', 'Percent Complete')
+    data_table.new_column('string', 'Dependencies')
+    data_table.add_rows(
+      [
+        ['Research' , 'Find sources'        , nil       , Date.parse("2015-1-1"), Date.parse("2015-1-5")  , nil               , 100 , nil],
+        ['Write'    , 'Write paper'         , 'write'   , nil                   , Date.parse("2015-1-9")  , days_to_milli(3)  , 25  , 'Research, Outline'],
+        ['Cite'     , 'Create bibliography' , 'write'   , nil                   , Date.parse("2015-1-7")  , days_to_milli(1)  , 20  , 'Research'],
+        ['Complete' , 'Hand in paper'       , 'complete', nil                   , Date.parse("2015-1-10") , days_to_milli(1)  , 0   , 'Cite, Write'],
+        ['Outline'  , 'Outline paper'       , 'write'   , nil                   , Date.parse("2015-1-6")  , days_to_milli(1)  , 100 , 'Research']
+      ]
+    )
+
+    opts = { version: "1.1", height: 275 }
+    @chart = GoogleVisualr::Interactive::GanttChart.new(data_table, opts)
 
   end
 
@@ -459,6 +546,29 @@ class Examples::InteractiveController < ApplicationController
 
   end
 
+  # https://developers.google.com/chart/interactive/docs/gallery/sankey#a-simple-example
+  def sankey
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'From')
+    data_table.new_column('string', 'To')
+    data_table.new_column('number', 'Weight')
+    data_table.add_rows(
+      [
+        ['A', 'X', 5],
+        ['A', 'Y', 7],
+        ['A', 'Z', 6],
+        ['B', 'X', 2],
+        ['B', 'Y', 9],
+        ['B', 'Z', 4]
+      ]
+    )
+
+    opts = { width: 600 }
+    @chart = GoogleVisualr::Interactive::Sankey.new(data_table, opts)
+
+  end
+
   # http://code.google.com/apis/chart/interactive/docs/gallery/scatterchart.html#Example
   def scatter_chart
 
@@ -578,4 +688,36 @@ class Examples::InteractiveController < ApplicationController
 
   end
 
+  # https://developers.google.com/chart/interactive/docs/gallery/wordtree#a-simple-example
+  def word_tree
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column("string", "Phrases")
+    data_table.add_rows(
+      [
+        ['cats are better than dogs'],
+        ['cats eat kibble'],
+        ['cats are better than hamsters'],
+        ['cats are awesome'],
+        ['cats are people too'],
+        ['cats eat mice'],
+        ['cats meowing'],
+        ['cats in the cradle'],
+        ['cats eat mice'],
+        ['cats in the cradle lyrics'],
+        ['cats eat kibble'],
+        ['cats for adoption'],
+        ['cats are family'],
+        ['cats eat mice'],
+        ['cats are better than kittens'],
+        ['cats are evil'],
+        ['cats are weird'],
+        ['cats eat mice']
+      ]
+    )
+
+    opts   = { wordtree: { format: 'implicit', word: 'cats' } }
+    @chart = GoogleVisualr::Interactive::WordTree.new(data_table, opts)
+
+  end
 end
