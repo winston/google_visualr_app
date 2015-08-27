@@ -1,0 +1,70 @@
+<h2>GoogleVisualr - Word Tree</h2>
+<div class='append-bottom'>
+  <hr>
+  <h3>Overview</h3>
+  <p>
+    A word tree depicts multiple parallel sequences of words. It could be used to show which words most often follow or precede a target word (Example: "Cats are...") or to show a hierarchy of terms (Example: a decision tree).
+  </p>
+  <p>
+    Please refer to <%= link_to "Google's documentation", "https://developers.google.com/chart/interactive/docs/gallery/wordtree" %> for details on <em>Data Format</em> and <em>Configuration Options</em>. However, <em>Methods</em> and <em>Events</em> are not implemented.
+  </p>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Example</h3>
+  <div id='chart'></div>
+  <%= render_chart @chart, 'chart' %>
+</div>
+<div class='append-bottom'>
+  <hr>
+  <h3>Code</h3>
+  <div>
+    <p>
+      In your controller, create the data_table object, set new columns, add row values, then instantiate the chart with configuration options.
+    </p>
+    <%= codify_ruby do %>
+  # https://developers.google.com/chart/interactive/docs/gallery/wordtree#a-simple-example
+  def word_tree
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column("string", "Phrases")
+    data_table.add_rows(
+      [
+        ['cats are better than dogs'],
+        ['cats eat kibble'],
+        ['cats are better than hamsters'],
+        ['cats are awesome'],
+        ['cats are people too'],
+        ['cats eat mice'],
+        ['cats meowing'],
+        ['cats in the cradle'],
+        ['cats eat mice'],
+        ['cats in the cradle lyrics'],
+        ['cats eat kibble'],
+        ['cats for adoption'],
+        ['cats are family'],
+        ['cats eat mice'],
+        ['cats are better than kittens'],
+        ['cats are evil'],
+        ['cats are weird'],
+        ['cats eat mice']
+      ]
+    )
+
+    opts   = { wordtree: { format: 'implicit', word: 'cats' } }
+    @chart = GoogleVisualr::Interactive::WordTree.new(data_table, opts)
+
+  end
+
+    <% end %>
+  </div>
+  <div>
+    <p>
+      In your view, use the <em>render_chart</em> method to generate <%= link_to "JavasScript", "https://developers.google.com/chart/interactive/docs/gallery/wordtree#a-simple-example" %>, during rendering of the view.
+    </p>
+    <%= codify_html do %>
+  <div id='chart'></div>
+  <%%= render_chart @chart, 'chart' %>
+    <% end %>
+  </div>
+</div>

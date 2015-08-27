@@ -30,14 +30,16 @@
     data_table.new_column('string', 'Year')
     data_table.new_column('number', 'Sales')
     data_table.new_column('number', 'Expenses')
-    data_table.add_rows( [
-      ['2004', 1000, 400],
-      ['2005', 1170, 460],
-      ['2006', 660, 1120],
-      ['2007', 1030, 540]
-    ])
+    data_table.add_rows(
+      [
+        ['2004', 1000, 400],
+        ['2005', 1170, 460],
+        ['2006', 660, 1120],
+        ['2007', 1030, 540]
+      ]
+    )
 
-    opts   = { width: 400, height: 240, title: 'Company Performance', hAxis: {title: 'Year', titleTextStyle: {color: '#FF0000'}} }
+    opts   = { width: 400, height: 240, title: 'Company Performance', hAxis: { title: 'Year', titleTextStyle: { color: '#FF0000' } } }
     @chart = GoogleVisualr::Interactive::AreaChart.new(data_table, opts)
 
   end
